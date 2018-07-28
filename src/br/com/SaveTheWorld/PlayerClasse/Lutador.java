@@ -2,25 +2,25 @@ package br.com.SaveTheWorld.PlayerClasse;
 
 public class Lutador extends Classe {
 	
-	public float pugMag(int fis, int mag){
+	public Double pugMag(Integer fis, Integer mag){
 		
-		float dano = (fis*mag)/100;
+		Double dano = (fis*mag)/120.0;
 		
-		System.out.println("Meu pode físico e mágico juntos! PUGNIS ET MAGIA!!");
+		System.out.println("Meu poder físico e mágico juntos! PUGNIS ET MAGIA!!");
 		System.err.println("Dano causado: " + dano);
 		
 		return dano;
 		
 	}
 	
-	public float ictu(int mag){
+	public Double ictu(Integer mag){
 		
-		float dano = (mag*3)/100;
+		Double dano = (mag*3)/100.0;
 		
-		System.out.println("Com um simples sopro eu posso acabar com você! ICTU!");
+		System.out.println("Com um simples sopro mágico eu posso acabar com você! ICTU!");
 		
 		if(dano <= 50){
-			System.err.println("Você é um lutador, não deveria soprar os outros por ai...");
+			System.err.println("Você é um lutador, não deveria sair soprando os outros por ai...");
 		}else{
 			System.err.println("NOSSA! você tem um sopro realmente Poderoso!!");
 		}
@@ -31,9 +31,9 @@ public class Lutador extends Classe {
 		
 	}
 	
-	public float pub(int fis){
+	public Double pub(Integer fis){
 		
-		float dano = (fis*40)/100;
+		Double dano = (fis*40)/100.0;
 		
 		System.out.println("Sinta o poder dos meus socos! PUGNIS SIMPLEX");
 		System.err.println("Dano causado: " + dano);

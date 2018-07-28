@@ -2,9 +2,9 @@ package br.com.SaveTheWorld.PlayerClasse;
 
 public class Mago extends Classe {
 
-	public float pot(int fis, int mag){
+	public Double pot(Integer fis, Integer mag){
 		
-		float dano = (fis*mag)/120;
+		Double dano = (fis*mag)/120.0;
 		
 		System.out.println("O Poder do meu Cajado! POTENTIA!");
 		System.err.println("Dano causado: " + dano);
@@ -13,9 +13,9 @@ public class Mago extends Classe {
 		
 	}
 	
-	public float ferrum(int fis){
+	public Double ferrum(Integer fis){
 		
-		float dano = (fis*3)/100;
+		Double dano = (fis*3)/100.0;
 		
 		System.out.println("Todo o Poder do meu Corpo! FERRUM!");
 		
@@ -31,9 +31,9 @@ public class Mago extends Classe {
 		
 	}
 	
-	public float inter(int mag){
+	public Double inter(Integer mag){
 		
-		float dano = (mag*40)/100;
+		Double dano = (mag*40)/100.0;
 		
 		System.out.println("Sinta sua destruição!! INTERITUM!");
 		System.err.println("Dano causado: " + dano);

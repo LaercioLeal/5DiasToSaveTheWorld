@@ -6,12 +6,14 @@ import br.com.SaveTheWorld.PlayerClasse.*;
 
 public class Jogo {
 
+	static Scanner tcld = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Scanner tcld = new Scanner(System.in);
-		
+		Player play;
 		String opc;
+		String nome;
 		
 		System.out.println("5DiasToSavetheWorld!!");
 		System.out.println("\nSeja Bem-Vindo Jogador!");
@@ -20,22 +22,75 @@ public class Jogo {
 		
 		opc = tcld.nextLine();
 		
-		if(opc.intern() == "1"){
-			System.out.println("Escolha a Classe desejada:");
-			System.out.println("\n\t1-Cavaleiro\n\t2-Mago\n\t3-Lutador\n\t4-Arqueiro");
+		if(opc.equals("1")){
 			
+			System.out.println("Digite o Nome de seu Personagem: ");
+			nome = tcld.nextLine();
+
+			play = new Player(nome);
+			
+			System.out.println("Escolha a Classe desejada:");
+			System.out.println("\n\t->Cavaleiro\n\t->Mago\n\t->Lutador\n\t->Arqueiro");
+		
 			opc = tcld.nextLine();
+			
+			play = Jogo.cria(opc, play);
+			
+			System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
+			System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
+			
+			play = Jogo.menuGame(play, opc);
+			
+			System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
+			System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
+			
 			
 		}
 		
 		tcld.close();
 		
-
 	}
 	
-	public static Classe cria(String opc){
+//MENU GAME QUE CONTROLA AS AÇÕES DO JOGADOR
+	public static Player menuGame(Player play, String cat){
 		
-		if(opc.intern() == "1"){
+		do{
+			System.out.println("\nOlá. O que deseja fazer agora?");
+			System.out.println("\t1-Enfrentar meus Inimigos!\n\t2-Trabalhar");
+			System.out.println("\t3-Treinar\n\t4-Ir a Loja\n\t5-Sair");
+			
+			cat = tcld.nextLine();
+			
+			if(cat.equals("1")){
+				
+			}
+			else if(cat.equals("2")){
+				
+				Double remun;
+				
+				System.out.println("Como deseja trabalhar hoje?");
+				System.out.println("\t->Padeiro\n\t->Professor\n\t->Vendedor\n\t->Policial\n\t->Politico\n\t->Voltar");
+				
+				cat = tcld.nextLine();
+		
+				remun = Trabalho.tipoTrab(cat, play.getLvl(), play.getExp());
+				
+				play.setGold(remun);
+				
+				System.out.println("Você agora tem: " + play.getGold() + " de gold!");
+				
+			}
+			
+		}while(!cat.equals("5"));
+		
+		return play;
+		
+	}
+	
+//MÉTODO DE CRIAÇÃO DE PERSONAGEM
+	public static Player cria(String opc, Player play){
+		
+		if(opc.equalsIgnoreCase("Cavaleiro") || opc.equalsIgnoreCase("Cav")){
 
 			Cavaleiro cav = new Cavaleiro();
 			
@@ -44,19 +99,15 @@ public class Jogo {
 			cav.setPf(180);
 			cav.setPm(50);
 			cav.setEnergia(180);
-			
-			int hp = cav.getHp();
-			int mp = cav.getMp();
-			int pf = cav.getPf();
-			int pm = cav.getPm();
-			int energia = cav.getEnergia();
-			
+		
+			play.setC(cav); //Altera o Atributo C (tipo Classe) para o novo tipo selecionado
+					
 			System.err.println("\nCavaleiro Criado!!");
-			System.out.println("Hp:" + hp + "Mp:" + mp + "Pf:" + pf + "Pm:" + pm + "Energia:" + energia);
+		
+			return play;
 			
-			return cav;
-			
-		}else if(opc.intern() == "2"){
+		}
+		else if(opc.equalsIgnoreCase("Mago")){
 
 			Mago mago = new Mago();
 			
@@ -66,18 +117,14 @@ public class Jogo {
 			mago.setPm(175);
 			mago.setEnergia(100);
 			
-			int hp = mago.getHp();
-			int mp = mago.getMp();
-			int pf = mago.getPf();
-			int pm = mago.getPm();
-			int energia = mago.getEnergia();
+			play.setC(mago); //Altera o Atributo C (tipo Classe) para o novo tipo selecionado
 			
 			System.err.println("\nMago Criado!!");
-			System.out.println("Hp:" + hp + "Mp:" + mp + "Pf:" + pf + "Pm:" + pm + "Energia:" + energia);
 			
-			return mago;
+			return play;
 		
-		}else if(opc.intern() == "3"){
+		}
+		else if(opc.equalsIgnoreCase("Lutador") || opc.equalsIgnoreCase("Lut")){
 
 			Lutador lut = new Lutador();
 			
@@ -87,18 +134,14 @@ public class Jogo {
 			lut.setPm(75);
 			lut.setEnergia(150);
 			
-			int hp = lut.getHp();
-			int mp = lut.getMp();
-			int pf = lut.getPf();
-			int pm = lut.getPm();
-			int energia = lut.getEnergia();
+			play.setC(lut); //Altera o Atributo C (tipo Classe) para o novo tipo selecionado
 			
 			System.err.println("\nLutador Criado!!");
-			System.out.println("Hp:" + hp + "Mp:" + mp + "Pf:" + pf + "Pm:" + pm + "Energia:" + energia);
-			
-			return lut;
 		
-		}else if(opc.intern() == "4"){
+			return play;
+		
+		}
+		else if(opc.equalsIgnoreCase("Arqueiro") || opc.equalsIgnoreCase("Arq")){
 
 			Arqueiro arq = new Arqueiro();
 			
@@ -108,20 +151,15 @@ public class Jogo {
 			arq.setPm(100);
 			arq.setEnergia(200);
 			
-			int hp = arq.getHp();
-			int mp = arq.getMp();
-			int pf = arq.getPf();
-			int pm = arq.getPm();
-			int energia = arq.getEnergia();
+			play.setC(arq); //Altera o Atributo C (tipo Classe) para o novo tipo selecionado
 			
 			System.err.println("\nArqueiro Criado!!");
-			System.out.println("Hp:" + hp + "Mp:" + mp + "Pf:" + pf + "Pm:" + pm + "Energia:" + energia);
 			
-			return arq;
+			return play;
 		
 		}
 		
 		return null;
 	}
-
+	
 }

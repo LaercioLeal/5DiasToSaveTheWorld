@@ -2,21 +2,21 @@ package br.com.SaveTheWorld.PlayerClasse;
 
 public abstract class Classe {
 
-	private int hp, mp, pf, pm, energia;
+	private Integer hp, mp, pf, pm, energia;
 
 	//ATAQUES E MAGIAS
 	
-	public float atqBas(int fis, int mag){
-	
-		float dano = 0;
+	public Double atqBas(Integer fis, Integer mag){
+
+		Double dano = 0.0;
 		
 		if(fis >= mag){
 			
-			dano = ((fis*30)/100 + (mag*10)/100)/3;
+			dano = (((fis*30)/100 + (mag*10)/100)/3.0);
 			
 		}else{
 			
-			dano = ((mag*30)/100 + (fis*10)/100)/3;
+			dano = (((mag*30)/100 + (fis*10)/100)/3.0);
 			
 		}
 		
@@ -25,43 +25,43 @@ public abstract class Classe {
 	}
 	
 	//MÉTODOS GETTERS E SETTERS
-	public int getHp() {
+	public Integer getHp() {
 		return hp;
 	}
 
-	public void setHp(int hp) {
+	public void setHp(Integer hp) {
 		this.hp = hp;
 	}
 
-	public int getMp() {
+	public Integer getMp() {
 		return mp;
 	}
 
-	public void setMp(int mp) {
+	public void setMp(Integer mp) {
 		this.mp = mp;
 	}
 
-	public int getPf() {
+	public Integer getPf() {
 		return pf;
 	}
 
-	public void setPf(int pf) {
+	public void setPf(Integer pf) {
 		this.pf = pf;
 	}
 
-	public int getPm() {
+	public Integer getPm() {
 		return pm;
 	}
 
-	public void setPm(int pm) {
+	public void setPm(Integer pm) {
 		this.pm = pm;
 	}
 
-	public int getEnergia() {
+	public Integer getEnergia() {
 		return energia;
 	}
 
-	public void setEnergia(int energia) {
+	public void setEnergia(Integer energia) {
 		this.energia = energia;
 	}
 	

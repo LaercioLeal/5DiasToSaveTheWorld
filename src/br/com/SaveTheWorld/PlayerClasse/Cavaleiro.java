@@ -2,20 +2,20 @@ package br.com.SaveTheWorld.PlayerClasse;
 
 public class Cavaleiro extends Classe{
 	
-	public float EspMag(int fis, int mag){
+	public Double espMag(Integer fis, Integer mag){
 		
-		float dano = (fis*mag)/120;
+		Double dano = (fis*mag)/120.0;
 		
-		System.out.println("Sinta minha Espada! MAGIA GLADIUM!");
+		System.out.println("Sinta a magia da minha Espada! MAGIA GLADIUM!");
 		System.err.println("Dano causado: " + dano);
 		
 		return dano;
 		
 	}
 	
-	public float lux(int mag){
+	public Double lux(int mag){
 		
-		float dano = (mag*3)/100;
+		Double dano = (mag*3)/100.0;
 		
 		System.out.println("Meu Poder Mágico e toda sua beleza!! TANTUM LUMEN!!\n");
 		
@@ -31,9 +31,9 @@ public class Cavaleiro extends Classe{
 		
 	}
 	
-	public float secans(int fis){
+	public Double secans(Integer fis){
 		
-		float dano = (fis*40)/100;
+		Double dano = (fis*40)/100.0;
 		
 		System.out.println("Não Sobrará nada! SECANS!");
 		System.err.println("Dano causado: " + dano);
