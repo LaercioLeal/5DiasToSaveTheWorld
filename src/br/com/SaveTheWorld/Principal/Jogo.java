@@ -18,11 +18,11 @@ public class Jogo {
 		System.out.println("5DiasToSavetheWorld!!");
 		System.out.println("\nSeja Bem-Vindo Jogador!");
 		System.out.println("O que deseja fazer?");
-		System.out.println("\t1-Começar Jogo\n\t2-Informações\n\t3-Sair");
+		System.out.println("\t1-Começar\n\t2-Informações\n\t3-Sair");
 		
 		opc = tcld.nextLine();
 		
-		if(opc.equals("1")){
+		if(opc.equals("1") || opc.equalsIgnoreCase("Começar")){
 			
 			System.out.println("Digite o Nome de seu Personagem: ");
 			nome = tcld.nextLine();
@@ -30,7 +30,7 @@ public class Jogo {
 			play = new Player(nome);
 			
 			System.out.println("Escolha a Classe desejada:");
-			System.out.println("\n\t->Cavaleiro\n\t->Mago\n\t->Lutador\n\t->Arqueiro");
+			System.out.println("\n\t1-Cavaleiro\n\t2-Mago\n\t3-Lutador\n\t4-Arqueiro");
 		
 			opc = tcld.nextLine();
 			
@@ -39,7 +39,23 @@ public class Jogo {
 			System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
 			System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
 			
-			play = Jogo.menuGame(play, opc);
+			do{
+				System.out.println("\nOlá. O que deseja fazer agora?");
+				System.out.println("\t1-Enfrentar meus Inimigos(LUTAR)!\n\t2-Trabalhar");
+				System.out.println("\t3-Treinar\n\t4-Ir a Loja\n\t5-Sair");
+				
+				opc = tcld.nextLine();
+				
+				if(opc.equals("1") || opc.equalsIgnoreCase("Lutar")){
+					
+				}
+				else if(opc.equals("2") || opc.equalsIgnoreCase("Trabalhar")){
+					
+					play = Jogo.trabalho(play, opc);
+					
+				}
+				
+			}while(!opc.equals("5"));
 			
 			System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
 			System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
@@ -52,37 +68,24 @@ public class Jogo {
 	}
 	
 //MENU GAME QUE CONTROLA AS AÇÕES DO JOGADOR
-	public static Player menuGame(Player play, String cat){
+	public static Player trabalho(Player play, String cat){
 		
-		do{
-			System.out.println("\nOlá. O que deseja fazer agora?");
-			System.out.println("\t1-Enfrentar meus Inimigos!\n\t2-Trabalhar");
-			System.out.println("\t3-Treinar\n\t4-Ir a Loja\n\t5-Sair");
-			
-			cat = tcld.nextLine();
-			
-			if(cat.equals("1")){
-				
-			}
-			else if(cat.equals("2")){
-				
-				Double remun;
-				
-				System.out.println("Como deseja trabalhar hoje?");
-				System.out.println("\t->Padeiro\n\t->Professor\n\t->Vendedor\n\t->Policial\n\t->Politico\n\t->Voltar");
-				
-				cat = tcld.nextLine();
+		Double remun;
 		
-				remun = Trabalho.tipoTrab(cat, play.getLvl(), play.getExp());
-				
-				play.setGold(remun);
-				
-				System.out.println("Você agora tem: " + play.getGold() + " de gold!");
-				
-			}
-			
-		}while(!cat.equals("5"));
+		System.out.println("Como deseja trabalhar hoje?");
+		System.out.println("\t1-Padeiro\n\t2-Professor\n\t3-Vendedor\n\t4-Policial\n\t5-Politico\n\t6-Voltar");
 		
+		cat = tcld.nextLine();
+		if(cat.equals("6")){
+			System.out.println("Até mais!!");
+		}else{
+
+			remun = Trabalho.tipoTrab(cat, play.getLvl(), play.getExp());
+			play.setGold(remun);
+			System.err.println("Você agora tem: " + play.getGold() + " de gold!");
+				
+		}
+				
 		return play;
 		
 	}
@@ -90,7 +93,7 @@ public class Jogo {
 //MÉTODO DE CRIAÇÃO DE PERSONAGEM
 	public static Player cria(String opc, Player play){
 		
-		if(opc.equalsIgnoreCase("Cavaleiro") || opc.equalsIgnoreCase("Cav")){
+		if(opc.equalsIgnoreCase("Cavaleiro") || opc.equalsIgnoreCase("Cav") || opc.equals("1")){
 
 			Cavaleiro cav = new Cavaleiro();
 			
@@ -107,7 +110,7 @@ public class Jogo {
 			return play;
 			
 		}
-		else if(opc.equalsIgnoreCase("Mago")){
+		else if(opc.equalsIgnoreCase("Mago") || opc.equals("2")){
 
 			Mago mago = new Mago();
 			
@@ -124,7 +127,7 @@ public class Jogo {
 			return play;
 		
 		}
-		else if(opc.equalsIgnoreCase("Lutador") || opc.equalsIgnoreCase("Lut")){
+		else if(opc.equalsIgnoreCase("Lutador") || opc.equalsIgnoreCase("Lut") || opc.equals("3")){
 
 			Lutador lut = new Lutador();
 			
@@ -141,7 +144,7 @@ public class Jogo {
 			return play;
 		
 		}
-		else if(opc.equalsIgnoreCase("Arqueiro") || opc.equalsIgnoreCase("Arq")){
+		else if(opc.equalsIgnoreCase("Arqueiro") || opc.equalsIgnoreCase("Arq") || opc.equals("4")){
 
 			Arqueiro arq = new Arqueiro();
 			
