@@ -34,7 +34,7 @@ public class Jogo {
 		
 			opc = tcld.nextLine();
 			
-			play = Jogo.cria(opc, play);
+			play = Jogo.cria(play, opc);
 			
 			System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
 			System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
@@ -47,6 +47,13 @@ public class Jogo {
 				opc = tcld.nextLine();
 				
 				if(opc.equals("1") || opc.equalsIgnoreCase("Lutar")){
+					
+					System.out.println("Selecione Seu Inimigo: ");
+					System.out.println("\t1-Ini1\t2-Ini2\t3-Ini3\t4-Ini4");
+					
+					opc = tcld.nextLine();
+					
+					play = Jogo.hist(play, opc);
 					
 				}
 				else if(opc.equals("2") || opc.equalsIgnoreCase("Trabalhar")){
@@ -91,7 +98,7 @@ public class Jogo {
 	}
 	
 //MÉTODO DE CRIAÇÃO DE PERSONAGEM
-	public static Player cria(String opc, Player play){
+	public static Player cria(Player play, String opc){
 		
 		if(opc.equalsIgnoreCase("Cavaleiro") || opc.equalsIgnoreCase("Cav") || opc.equals("1")){
 
@@ -165,4 +172,24 @@ public class Jogo {
 		return null;
 	}
 	
+	public static Player hist(Player play, String opc){
+		
+		Inimigo Ini = new Inimigo();
+		Ini = Inimigo.CriaIni(play, opc);
+		
+		Integer Hp = play.c.getHp();
+		Integer Mp = play.c.getMp();
+		
+		do{
+			
+			//Continuar pelo a simulação de luta
+			
+		}while((play.c.getHp()!=0) || (Ini.getHp()!=0));
+		
+		play.c.setHp(Hp);
+		play.c.setMp(Mp);
+		
+		return play;
+		
+	}
 }

@@ -9,7 +9,7 @@ public class Player {
 	private Integer Lvl;
 	private Double Exp;
 	private String equip;
-	Classe c;
+	public Classe c;
 
 //CONSTRUCTOR DA CLASSE
 	public Player(String nome){
