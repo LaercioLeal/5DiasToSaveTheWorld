@@ -12,6 +12,8 @@ public class Cavaleiro extends Classe{
 	
 	public Double lux(int mag){
 		
+		//Tantum Lumen
+		
 		Double dano = (mag*3)/100.0;
 		
 		return dano;

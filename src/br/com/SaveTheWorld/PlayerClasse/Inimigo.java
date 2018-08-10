@@ -72,6 +72,64 @@ public class Inimigo {
 		
 	}
 	
+	public Double Interitum(){
+		
+		Double dano = 0.0;
+		Integer fis = ini.getPf();
+		Integer mag = ini.getPm();
+		
+		dano = (fis*mag)/120.0;
+		
+		return dano;
+		
+	}
+	
+	public Double Mundi(){
+		
+		//Mundi Nuclear
+		
+		Double dano = 0.0;
+		Integer fis = ini.getPf();
+		Integer mag = ini.getPm();
+		
+		if(fis > mag){
+			
+			dano = (mag*3)/100.0;
+			
+		}
+		else{
+			
+			dano = (fis*3)/100.0;
+			
+		}
+		
+		return dano;
+		
+	}
+	
+	public Double Vene(){
+	
+		//Veneficus Maledictus
+	
+		Double dano = 0.0;
+		Integer fis = ini.getPf();
+		Integer mag = ini.getPm();
+		
+		if(fis > mag){
+			
+			dano = (fis*25)/100.0;
+			
+		}
+		else{
+			
+			dano = (mag*25)/100.0;
+			
+		}
+		
+		return dano;
+		
+	}
+
 //MÉTODOS GETTERS E SETTERS
 
 	public Double getHp() {

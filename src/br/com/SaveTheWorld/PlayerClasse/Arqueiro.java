@@ -4,6 +4,8 @@ public class Arqueiro extends Classe {
 	
 	public Double sagSpi(Integer fis, Integer mag){
 		
+		//Sagittis Spiritualis
+		
 		Double dano = (fis*mag)/120.0;
 		
 		return dano;
@@ -19,6 +21,8 @@ public class Arqueiro extends Classe {
 	}
 	
 	public Double dupSag(Integer fis, Integer mag){
+		
+		//Duplex Sagittis
 		
 		Double dano = ((fis+mag)*30)/100.0;
 		

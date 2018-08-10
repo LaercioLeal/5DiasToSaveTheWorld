@@ -4,6 +4,8 @@ public class Mago extends Classe {
 
 	public Double pot(Integer fis, Integer mag){
 		
+		//Potentia
+		
 		Double dano = (fis*mag)/120.0;
 		
 		return dano;
@@ -19,6 +21,8 @@ public class Mago extends Classe {
 	}
 	
 	public Double inter(Integer mag){
+		
+		//Interitum
 		
 		Double dano = (mag*40)/100.0;
 		
