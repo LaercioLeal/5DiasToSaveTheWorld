@@ -52,9 +52,6 @@ public class Player {
 	public void setEquip(String equip) {
 		this.equip = equip;
 	}
-	public Classe getC() {
-		return c;
-	}
 	
 //MÉTODO PARA SETAR A CLASSE SELECIONADA
 	public void setC(Classe c) {
@@ -71,7 +68,12 @@ public class Player {
 		else if(c instanceof Arqueiro){
 			c = (Arqueiro) c;
 		}
+		
 		this.c = c;
+		
+	}
+	public Classe getC() {
+		return c;
 	}
 	
 }

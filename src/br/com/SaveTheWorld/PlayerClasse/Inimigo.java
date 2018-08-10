@@ -4,37 +4,42 @@ import br.com.SaveTheWorld.Principal.Player;
 
 public class Inimigo {
 
-	Integer Hp, Pf, Pm;
-	private static Inimigo ini;
+	Double Hp;
+	Integer Pf, Pm;
+	private static Inimigo ini = new Inimigo();
 	
 	public static Inimigo CriaIni(Player p, String opc){
 		
-		ini = null;
+		Double aux;
 		
 		if(opc.equals("1") || opc.equalsIgnoreCase("Cavaleiro")){
 			
-			ini.setHp(p.c.getHp()*3);
+			aux = (p.c.getHp()*3.0);
+			ini.setHp(aux);
 			ini.setPf(p.c.getPf() + (p.c.getPf()*30)/100);
 			ini.setPm(p.c.getPm() + (p.c.getPm()*15)/100);
 			
 		}
 		else if(opc.equals("2") || opc.equalsIgnoreCase("Mago")){
-			
-			ini.setHp(p.c.getHp()*3);
+
+			aux = (p.c.getHp()*3.0);
+			ini.setHp(aux);
 			ini.setPf(p.c.getPf() + (p.c.getPf()*15)/100);
 			ini.setPm(p.c.getPm() + (p.c.getPm()*30)/100);
 			
 		}
 		else if(opc.equals("3") || opc.equalsIgnoreCase("Lutador")){
-			
-			ini.setHp(p.c.getHp()*3);
+
+			aux = (p.c.getHp()*3.0);
+			ini.setHp(aux);
 			ini.setPf(p.c.getPf() + (p.c.getPf()*25)/100);
 			ini.setPm(p.c.getPm() + (p.c.getPm()*20)/100);
 			
 		}
 		else if(opc.equals("4") || opc.equalsIgnoreCase("Arqueiro")){
-			
-			ini.setHp(p.c.getHp()*3);
+
+			aux = (p.c.getHp()*3.0);
+			ini.setHp(aux);
 			ini.setPf(p.c.getPf() + (p.c.getPf()*25)/100);
 			ini.setPm(p.c.getPm() + (p.c.getPm()*25)/100);
 			
@@ -69,11 +74,11 @@ public class Inimigo {
 	
 //MÉTODOS GETTERS E SETTERS
 
-	public Integer getHp() {
+	public Double getHp() {
 		return Hp;
 	}
 
-	public void setHp(Integer hp) {
+	public void setHp(Double hp) {
 		Hp = hp;
 	}
 

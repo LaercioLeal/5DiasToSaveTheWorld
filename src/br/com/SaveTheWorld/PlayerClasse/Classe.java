@@ -2,8 +2,9 @@ package br.com.SaveTheWorld.PlayerClasse;
 
 public abstract class Classe {
 
-	private Integer hp, mp, pf, pm, energia;
-
+	private Integer mp, pf, pm, energia;
+	private Double hp;
+	
 	//ATAQUES E MAGIAS
 	
 	public Double atqBas(Integer fis, Integer mag){
@@ -20,16 +21,18 @@ public abstract class Classe {
 			
 		}
 		
+		System.out.println("Você causou: " + dano + " de dano.");
+		
 		return dano;
 		
 	}
 	
 	//MÉTODOS GETTERS E SETTERS
-	public Integer getHp() {
+	public Double getHp() {
 		return hp;
 	}
 
-	public void setHp(Integer hp) {
+	public void setHp(Double hp) {
 		this.hp = hp;
 	}
 
