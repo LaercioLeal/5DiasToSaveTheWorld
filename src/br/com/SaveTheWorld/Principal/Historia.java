@@ -10,7 +10,7 @@ public class Historia{
 	
 	static Scanner tcld = new Scanner(System.in);
 	
-	public Double IniAtq(Inimigo ini){
+	public static Double IniAtq(Inimigo ini){
 		
 		Random r = new Random();
 		Integer opc = r.nextInt(4)+1;
@@ -21,21 +21,22 @@ public class Historia{
 			System.out.println("SINTA O PODER DO MEU ATAQUE!");
 			dano = ini.AtqBas();
 			
-			System.err.println("Você sofreu " + dano + " de dano");
-			
 		}
 		else if(opc.equals(2)){
 			
+			System.out.println("Eu aniquilarei sua existência! INTERITUM!!");
 			dano = ini.Interitum();
 			
 		}
 		else if(opc.equals(3)){
 			
+			System.out.println("Mostrarei Todo o meu Poder Nuclear! MUNDI NUCLEAR AHAHAAHAH!!");
 			dano = ini.Mundi();
 			
 		}
 		else if(opc.equals(4)){
 			
+			System.out.println("Eu amaldiçoo a sua existencia ser insolente! VENEFICUS MALEDICTUS!");
 			dano = ini.Vene();
 			
 		}
@@ -56,9 +57,14 @@ public class Historia{
 		
 		ini = Inimigo.CriaIni(play, opc);
 		Double dano = 0.0;
+		Double danop = 0.0;
 		
 		Double Hp = play.c.getHp();
 		Integer Mp = play.c.getMp();
+		
+		Double exp = 0.0;
+		
+		System.err.println("Seu inimigo tem: " + df.format(ini.getHp()) + " de Hp.");
 		
 		do{
 			
@@ -66,18 +72,32 @@ public class Historia{
 			
 			System.out.println("Selecione seu Ataque: ");
 			
-			dano = Historia.ExibeAtq(play, opc);
-			
+			dano = Historia.ExibeAtq(play, opc); //Dano causado no inimigo
 			dano = ini.getHp() - dano;
 			
+			danop = Historia.IniAtq(ini); //Dano causado no player
+			System.err.println("Você sofreu " + df.format(danop) + " de dano.");
+			danop = play.c.getHp() - danop;
+			
 			ini.setHp(dano);
+			play.c.setHp(danop);
 			
 			if(play.c.getHp() <= 0){
 				System.err.println("Oh, você Morreu!!");
+				System.err.println("Seu inimigo tem: " + df.format(ini.getHp()) + " de Hp.");
 				break;
 			}
 			else if(ini.getHp() <= 0){
+				System.err.println("Você tem: " + df.format(play.c.getHp()) + " de HP.");
 				System.err.println("Oh, Você matou seu oponente!");
+				
+				exp = (ini.getPf() + ini.getPm())*0.3;
+				
+				System.err.println("Você conseguiu: " + df.format(exp) + " de exp.");
+				
+				exp = play.getExp() + exp;
+				play.setExp(exp);
+				
 			}
 			else{
 				System.err.println("Você tem: " + df.format(play.c.getHp()) + " de HP.");
@@ -93,6 +113,7 @@ public class Historia{
 		
 	}
 	
+	
 	public static Double ExibeAtq(Player play, String opc){
 		
 		DecimalFormat df = new DecimalFormat("###,##0.00");
@@ -105,7 +126,7 @@ public class Historia{
 			
 			Cavaleiro c = (Cavaleiro) play.getC();
 			
-			System.out.print("1-Ataque Básico\t2-Magia Gladium\t3-Tantum Lumen\t4-Secans");
+			System.out.print("1-Ataque Básico\t2-Magia Gladium\t3-Tantum Lumen\t4-Secans\n");
 			
 			opc = tcld.nextLine();
 			
@@ -146,7 +167,7 @@ public class Historia{
 			}
 			else{
 				
-				System.err.println("Você não tem Suficiente!");
+				System.err.println("Você não tem mana Suficiente!");
 				
 			}
 			
@@ -155,7 +176,7 @@ public class Historia{
 			
 			Mago c = (Mago) play.getC();
 			
-			System.out.print("1-Ataque Básico\t2-Potentia\t3-Ferrum\t4-Interitum");
+			System.out.print("1-Ataque Básico\t2-Potentia\t3-Ferrum\t4-Interitum\n");
 			
 			opc = tcld.nextLine();
 			
@@ -197,7 +218,7 @@ public class Historia{
 			}
 			else{
 				
-				System.err.println("Você não tem Suficiente!");
+				System.err.println("Você não tem mana Suficiente!");
 				
 			}
 			
@@ -206,7 +227,7 @@ public class Historia{
 			
 			Lutador c = (Lutador) play.getC();
 			
-			System.out.print("1-Ataque Básico\t2-Pugnis et Magia\t3-Ictu\t4-Pugnis Simplex");
+			System.out.print("1-Ataque Básico\t2-Pugnis et Magia\t3-Ictu\t4-Pugnis Simplex\n");
 			
 			opc = tcld.nextLine();
 			
@@ -248,7 +269,7 @@ public class Historia{
 			}
 			else{
 				
-				System.err.println("Você não tem Suficiente!");
+				System.err.println("Você não tem mana Suficiente!");
 				
 			}
 		}
@@ -256,7 +277,7 @@ public class Historia{
 			
 			Arqueiro c = (Arqueiro) play.getC();
 			
-			System.out.print("1-Ataque Básico\t2-Sagittis Spiritualis\t3-Proin\t4-Duplex Sagittis");
+			System.out.print("1-Ataque Básico\t2-Sagittis Spiritualis\t3-Proin\t4-Duplex Sagittis\n");
 			
 			opc = tcld.nextLine();
 			
@@ -300,13 +321,13 @@ public class Historia{
 			}
 			else{
 				
-				System.err.println("Você não tem Suficiente!");
+				System.err.println("Você não tem mana Suficiente!");
 				
 			}
 		}
 		
 		System.err.println("Dano causado: " + df.format(dano));
-		System.err.println("Você tem: " + play.c.getMp());
+		System.err.println("Você tem: " + play.c.getMp() + " de mana.");
 		
 		return dano;
 		

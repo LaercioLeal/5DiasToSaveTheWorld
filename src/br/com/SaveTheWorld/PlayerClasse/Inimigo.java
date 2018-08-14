@@ -14,34 +14,34 @@ public class Inimigo {
 		
 		if(opc.equals("1") || opc.equalsIgnoreCase("Cavaleiro")){
 			
-			aux = (p.c.getHp()*3.0);
+			aux = (p.c.getHp()*1.6);
 			ini.setHp(aux);
-			ini.setPf(p.c.getPf() + (p.c.getPf()*30)/100);
-			ini.setPm(p.c.getPm() + (p.c.getPm()*15)/100);
+			ini.setPf(p.c.getPf() + (p.c.getPf()*10)/100);
+			ini.setPm(p.c.getPm() + (p.c.getPm()*8)/100);
 			
 		}
 		else if(opc.equals("2") || opc.equalsIgnoreCase("Mago")){
 
-			aux = (p.c.getHp()*3.0);
+			aux = (p.c.getHp()*1.4);
 			ini.setHp(aux);
-			ini.setPf(p.c.getPf() + (p.c.getPf()*15)/100);
-			ini.setPm(p.c.getPm() + (p.c.getPm()*30)/100);
+			ini.setPf(p.c.getPf() + (p.c.getPf()*8)/100);
+			ini.setPm(p.c.getPm() + (p.c.getPm()*10)/100);
 			
 		}
 		else if(opc.equals("3") || opc.equalsIgnoreCase("Lutador")){
 
-			aux = (p.c.getHp()*3.0);
+			aux = (p.c.getHp()*1.5);
 			ini.setHp(aux);
-			ini.setPf(p.c.getPf() + (p.c.getPf()*25)/100);
-			ini.setPm(p.c.getPm() + (p.c.getPm()*20)/100);
+			ini.setPf(p.c.getPf() + (p.c.getPf()*12)/100);
+			ini.setPm(p.c.getPm() + (p.c.getPm()*10)/100);
 			
 		}
 		else if(opc.equals("4") || opc.equalsIgnoreCase("Arqueiro")){
 
-			aux = (p.c.getHp()*3.0);
+			aux = (p.c.getHp()*1.4);
 			ini.setHp(aux);
-			ini.setPf(p.c.getPf() + (p.c.getPf()*25)/100);
-			ini.setPm(p.c.getPm() + (p.c.getPm()*25)/100);
+			ini.setPf(p.c.getPf() + (p.c.getPf()*10)/100);
+			ini.setPm(p.c.getPm() + (p.c.getPm()*10)/100);
 			
 		}
 		
@@ -78,7 +78,7 @@ public class Inimigo {
 		Integer fis = ini.getPf();
 		Integer mag = ini.getPm();
 		
-		dano = (fis*mag)/120.0;
+		dano = (fis*mag)/275.0;
 		
 		return dano;
 		
@@ -117,12 +117,12 @@ public class Inimigo {
 		
 		if(fis > mag){
 			
-			dano = (fis*25)/100.0;
+			dano = (fis*15)/100.0;
 			
 		}
 		else{
 			
-			dano = (mag*25)/100.0;
+			dano = (mag*15)/100.0;
 			
 		}
 		

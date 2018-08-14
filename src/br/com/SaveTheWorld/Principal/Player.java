@@ -52,6 +52,9 @@ public class Player {
 	public void setEquip(String equip) {
 		this.equip = equip;
 	}
+	public Classe getC() {
+		return c;
+	}
 	
 //MÉTODO PARA SETAR A CLASSE SELECIONADA
 	public void setC(Classe c) {
@@ -72,8 +75,56 @@ public class Player {
 		this.c = c;
 		
 	}
-	public Classe getC() {
-		return c;
+
+//VERIFICAÇÃO E CÁLCULO DE EXP
+	public Integer nextLvl(){
+		
+		Integer nextLvl;
+		
+		if( Lvl <= 8){
+			nextLvl = 85*Lvl;	
+		}
+		else if(Lvl > 8 && Lvl <= 20){
+			nextLvl = 115*Lvl;
+		}
+		else{
+			nextLvl = 145*Lvl;
+		}
+		
+		return nextLvl;
+		
+	}
+	
+	public Integer verificaExp(Player play){
+		
+		Integer nextLvl = play.nextLvl();
+		Integer ret = 0;
+		Double hp = play.c.getHp();
+		Integer mp = play.c.getMp();
+		Integer pf = play.c.getPf();
+		Integer pm = play.c.getPm();
+		Integer en = play.c.getEnergia();
+		
+		if(Exp >= nextLvl){
+			
+			hp = hp + hp*0.1;
+			mp = mp + (mp*10)/100;
+			pf = pf + (pf*5)/100;
+			pm = pm + (pm*5)/100;
+			en = en + (en*5)/100;
+			
+			play.setLvl(Lvl + 1);
+			play.c.setHp(hp);
+			play.c.setMp(mp);
+			play.c.setPf(pf);
+			play.c.setPm(pm);
+			play.c.setEnergia(en);
+			
+			ret = 1;
+		}
+		
+		return ret;
+		
 	}
 	
 }

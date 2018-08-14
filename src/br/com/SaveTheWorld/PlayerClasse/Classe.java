@@ -21,8 +21,6 @@ public abstract class Classe {
 			
 		}
 		
-		System.out.println("Você causou: " + dano + " de dano.");
-		
 		return dano;
 		
 	}

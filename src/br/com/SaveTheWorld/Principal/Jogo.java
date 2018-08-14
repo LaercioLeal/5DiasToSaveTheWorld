@@ -14,6 +14,7 @@ public class Jogo {
 		Player play;
 		String opc;
 		String nome;
+		Integer ret;
 		
 		System.out.println("5DiasToSavetheWorld!!");
 		System.out.println("\nSeja Bem-Vindo Jogador!");
@@ -38,6 +39,7 @@ public class Jogo {
 			
 			System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
 			System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
+			System.out.println("Você precisa de " + play.nextLvl() + " de experiência para o próximo nível.");
 			
 			do{
 				System.out.println("\nOlá. O que deseja fazer agora?");
@@ -55,6 +57,16 @@ public class Jogo {
 					
 					play = Jogo.trabalho(play, opc);
 					
+				}
+				
+				ret = play.verificaExp(play);
+				
+				if(ret == 1){
+					System.err.println("Parabéns! Você passou de nivel!\nSeu nível agora é: " + play.getLvl());
+					
+					System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
+					System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
+					System.out.println("Você precisa de " + play.nextLvl() + " de experiência para o próximo nível.");
 				}
 				
 			}while(!opc.equals("5"));
