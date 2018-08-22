@@ -1,5 +1,7 @@
 package br.com.SaveTheWorld.Principal;
 
+import java.util.ArrayList;
+
 import br.com.SaveTheWorld.PlayerClasse.*;
 
 public class Player {
@@ -10,6 +12,7 @@ public class Player {
 	private Double Exp;
 	private String equip;
 	public Classe c;
+	private ArrayList<Item> bag = new ArrayList<Item>();
 
 //CONSTRUCTOR DA CLASSE
 	public Player(String nome){
@@ -54,6 +57,13 @@ public class Player {
 	}
 	public Classe getC() {
 		return c;
+	}
+	public ArrayList<Item> getBag() {
+		return bag;
+	}
+
+	public void setBag(ArrayList<Item> bag) {
+		this.bag = bag;
 	}
 	
 //MÉTODO PARA SETAR A CLASSE SELECIONADA

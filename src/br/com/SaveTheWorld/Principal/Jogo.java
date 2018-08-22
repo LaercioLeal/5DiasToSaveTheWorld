@@ -56,7 +56,7 @@ public class Jogo {
 				//Inicio do Jogo
 				
 				System.out.println("\nOlá. O que deseja fazer agora?");
-				System.out.println("\t1-Enfrentar meus Inimigos(LUTAR)!\n\t2-Trabalhar");
+				System.out.println("\t1-Enfrentar meus Inimigos(LUTAR)!\n\t2-Trabalhar(50 EN)");
 				System.out.println("\t3-Treinar\n\t4-Ir a Loja\n\t5-Descansar (50 G)\n\t6-Sair");
 				
 				opc = tcld.nextLine();
@@ -68,8 +68,12 @@ public class Jogo {
 				}
 				else if(opc.equals("2") || opc.equalsIgnoreCase("Trabalhar")){
 					
-					play = Jogo.trabalho(play, opc);
-					
+					if((play.c.getEnergia() - 50) >= 0){
+						play = Jogo.trabalho(play, opc);
+					}
+					else{
+						System.out.println("Você não tem Energia suficiente");
+					}
 				}
 				else if(opc.equals("3") || opc.equalsIgnoreCase("Treinar")){
 					play = Jogo.treinar(play, opc);
@@ -123,8 +127,8 @@ public class Jogo {
 			remun = Trabalho.tipoTrab(cat, play.getLvl(), play.getExp());
 			remun = remun + play.getGold();
 			play.setGold(remun);
+			play.c.setEnergia(play.c.getEnergia() - 50);
 			System.err.println("Você agora tem: " + play.getGold() + " de gold!");
-				
 		}
 				
 		return play;
