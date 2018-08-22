@@ -6,7 +6,7 @@ public class Mago extends Classe {
 		
 		//Potentia
 		
-		Double dano = (fis*mag)/120.0;
+		Double dano = (fis*mag)/140.0;
 		
 		return dano;
 		

@@ -1,5 +1,6 @@
 package br.com.SaveTheWorld.Principal;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import br.com.SaveTheWorld.PlayerClasse.*;
@@ -7,14 +8,17 @@ import br.com.SaveTheWorld.PlayerClasse.*;
 public class Jogo {
 
 	static Scanner tcld = new Scanner(System.in);
+	static Double hpMax;
+	static Integer mpMax, enMax;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		//Declaração das Variáveis
 		Player play;
-		String opc;
-		String nome;
+		String opc, nome;
 		Integer ret;
+		DecimalFormat df = new DecimalFormat("###,##0.00");
 		
 		System.out.println("5DiasToSavetheWorld!!");
 		System.out.println("\nSeja Bem-Vindo Jogador!");
@@ -24,6 +28,8 @@ public class Jogo {
 		opc = tcld.nextLine();
 		
 		if(opc.equals("1") || opc.equalsIgnoreCase("Começar")){
+			
+			//Inicio da Criação do personagem
 			
 			System.out.println("Digite o Nome de seu Personagem: ");
 			nome = tcld.nextLine();
@@ -38,13 +44,20 @@ public class Jogo {
 			play = Jogo.cria(play, opc);
 			
 			System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
-			System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
+			System.out.println("Hp: " + df.format(play.c.getHp()) + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
 			System.out.println("Você precisa de " + play.nextLvl() + " de experiência para o próximo nível.");
+
+			hpMax = play.c.getHp();
+			mpMax = play.c.getMp();
+			enMax = play.c.getEnergia();
 			
 			do{
+				
+				//Inicio do Jogo
+				
 				System.out.println("\nOlá. O que deseja fazer agora?");
 				System.out.println("\t1-Enfrentar meus Inimigos(LUTAR)!\n\t2-Trabalhar");
-				System.out.println("\t3-Treinar\n\t4-Ir a Loja\n\t5-Sair");
+				System.out.println("\t3-Treinar\n\t4-Ir a Loja\n\t5-Descansar (50 G)\n\t6-Sair");
 				
 				opc = tcld.nextLine();
 				
@@ -58,22 +71,35 @@ public class Jogo {
 					play = Jogo.trabalho(play, opc);
 					
 				}
-				
+				else if(opc.equals("3") || opc.equalsIgnoreCase("Treinar")){
+					play = Jogo.treinar(play, opc);
+				}
+				else if (opc.equals("5") || opc.equalsIgnoreCase("Descansar")){
+					
+					if((play.getGold() - 50.0) >= 0){
+							
+						play.setGold(play.getGold() - 50.0);
+						play.c.setHp(hpMax);
+						play.c.setMp(mpMax);
+						play.c.setEnergia(enMax);
+						
+						System.out.println("Você se recuperou bem!!");
+					}
+					else{
+						System.out.println("Você não tem Gold suficiente");
+					}
+				}
 				ret = play.verificaExp(play);
 				
 				if(ret == 1){
 					System.err.println("Parabéns! Você passou de nivel!\nSeu nível agora é: " + play.getLvl());
-					
-					System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
-					System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
-					System.out.println("Você precisa de " + play.nextLvl() + " de experiência para o próximo nível.");
+					System.out.println("Você precisa de " + df.format(play.nextLvl()) + " de experiência para o próximo nível.");
 				}
 				
-			}while(!opc.equals("5"));
-			
-			System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
-			System.out.println("Hp: " + play.c.getHp() + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
-			
+				System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
+				System.out.println("Hp: " + df.format(play.c.getHp()) + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
+				
+			}while(!opc.equals("6"));
 			
 		}
 		
@@ -81,7 +107,7 @@ public class Jogo {
 		
 	}
 	
-//MENU GAME QUE CONTROLA AS AÇÕES DO JOGADOR
+//MÉTODO DE TRABALHO
 	public static Player trabalho(Player play, String cat){
 		
 		Double remun;
@@ -95,6 +121,7 @@ public class Jogo {
 		}else{
 
 			remun = Trabalho.tipoTrab(cat, play.getLvl(), play.getExp());
+			remun = remun + play.getGold();
 			play.setGold(remun);
 			System.err.println("Você agora tem: " + play.getGold() + " de gold!");
 				
@@ -179,5 +206,109 @@ public class Jogo {
 		return null;
 	}
 
-
+//MÉTODO DE TREINAMENTO
+	public static Player treinar(Player play, String opc){
+		
+		int aux1, aux2;
+		Integer en;
+		Double g, aux;
+		DecimalFormat df = new DecimalFormat("###,##0.00");
+		
+		System.out.println("Treinar:\n\t1-HP(20 EN/20G)\n\t2-MP(20 EN/20G)\n\t3-Poder Físico(30 EN/35G)");
+		System.out.println("\t4-Poder Mágico(30 EN/35G)\n\t5-Energia(50 HP/40G)\n\t6-Voltar");
+		opc = tcld.nextLine();
+		
+		if(opc.equals("1") || opc.equalsIgnoreCase("HP")){
+			//PENSAR EM COMO RESOLVER O PROBLEMA DA ENERGIA MÁXIMA
+			
+			g = Treino.descontaGold(20.0, play.getGold());
+			en = Treino.descontaEn(20, play.c.getEnergia());
+			aux1 = g.compareTo(0.0);
+			aux2 = en.compareTo(0);
+			
+			if(aux1 >= 0 && aux2 >= 0){
+				
+				hpMax = Treino.treinoHP(play, hpMax);
+				System.out.println("Você agora tem: " + df.format(hpMax) + " de HP total!");
+				play.setGold(g);
+				play.c.setEnergia(en);
+				
+			}
+			else if(aux1 < 0 || aux2 < 0){
+				System.out.println("Você não tem recursos Suficientes!");
+			}
+			
+		}
+		else if(opc.equals("2") || opc.equalsIgnoreCase("MP")){
+			
+			g = Treino.descontaGold(20.0, play.getGold());
+			en = Treino.descontaEn(20, play.c.getEnergia());
+			aux1 = g.compareTo(0.0);
+			aux2 = en.compareTo(0);
+			
+			if(aux1 >= 0 && aux2 >= 0){
+				
+				mpMax = Treino.treinoMP(play, mpMax);
+				System.out.println("Você agora tem: " + mpMax + " de MP total!");
+				play.setGold(g);
+				play.c.setEnergia(en);
+			}
+			else if(aux1 < 0 || aux2 < 0){
+				System.out.println("Você não tem recursos Suficientes!");
+			}
+		}
+		else if(opc.equals("3") || opc.equalsIgnoreCase("Poder Fisico")){
+			g = Treino.descontaGold(35.0, play.getGold());
+			en = Treino.descontaEn(30, play.c.getEnergia());
+			aux1 = g.compareTo(0.0);
+			aux2 = en.compareTo(0);
+			
+			if(aux1 >= 0 && aux2 >= 0){
+				
+				play.c.setPf(Treino.treinoAtri(opc, play));
+				System.out.println("Você agora tem: " + play.c.getPf() + " de Poder Físico!");
+				play.setGold(g);
+				play.c.setEnergia(en);
+			}
+			else if(aux1 < 0 || aux2 < 0){
+				System.out.println("Você não tem recursos Suficientes!");
+			}
+		}
+		else if(opc.equals("4") || opc.equalsIgnoreCase("Poder Magico")){
+			g = Treino.descontaGold(35.0, play.getGold());
+			en = Treino.descontaEn(30, play.c.getEnergia());
+			aux1 = g.compareTo(0.0);
+			aux2 = en.compareTo(0);
+			
+			if(aux1 >= 0 && aux2 >= 0){
+				
+				play.c.setPm(Treino.treinoAtri(opc, play));
+				System.out.println("Você agora tem: " + play.c.getPm() + " de Poder Mágico");
+				play.setGold(g);
+				play.c.setEnergia(en);
+			}
+			else if(aux1 < 0 || aux2 < 0){
+				System.out.println("Você não tem recursos Suficientes!");
+			}
+		}
+		else if(opc.equals("5") || opc.equalsIgnoreCase("Energia")){
+			g = Treino.descontaGold(40.0, play.getGold());
+			aux1 = g.compareTo(0.0);
+			aux = play.c.getHp() - 50.0;
+			
+			if(aux1 >= 0 && aux >= 0){
+				
+				enMax = Treino.treinoEn(play, enMax);
+				System.out.println("Você agora tem: " + enMax + " de Energia Total");
+				play.setGold(g);
+				play.c.setHp(play.c.getHp() - 50);
+			}
+			else if(aux1 < 0 || aux < 0){
+				System.out.println("Você não tem recursos Suficientes!");
+			}
+		}
+		
+		return play;
+		
+	}
 }

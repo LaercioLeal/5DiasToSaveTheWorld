@@ -14,7 +14,7 @@ public class Inimigo {
 		
 		if(opc.equals("1") || opc.equalsIgnoreCase("Cavaleiro")){
 			
-			aux = (p.c.getHp()*1.6);
+			aux = (p.c.getHp()*1.7);
 			ini.setHp(aux);
 			ini.setPf(p.c.getPf() + (p.c.getPf()*10)/100);
 			ini.setPm(p.c.getPm() + (p.c.getPm()*8)/100);
@@ -30,7 +30,7 @@ public class Inimigo {
 		}
 		else if(opc.equals("3") || opc.equalsIgnoreCase("Lutador")){
 
-			aux = (p.c.getHp()*1.5);
+			aux = (p.c.getHp()*1.6);
 			ini.setHp(aux);
 			ini.setPf(p.c.getPf() + (p.c.getPf()*12)/100);
 			ini.setPm(p.c.getPm() + (p.c.getPm()*10)/100);
@@ -38,7 +38,7 @@ public class Inimigo {
 		}
 		else if(opc.equals("4") || opc.equalsIgnoreCase("Arqueiro")){
 
-			aux = (p.c.getHp()*1.4);
+			aux = (p.c.getHp()*1.5);
 			ini.setHp(aux);
 			ini.setPf(p.c.getPf() + (p.c.getPf()*10)/100);
 			ini.setPm(p.c.getPm() + (p.c.getPm()*10)/100);

@@ -32,7 +32,7 @@ public class Player {
 		return gold;
 	}
 	public void setGold(Double gold) {
-		this.gold += gold;
+		this.gold = gold;
 	}
 	public Integer getLvl() {
 		return Lvl;

@@ -4,7 +4,7 @@ public class Lutador extends Classe {
 	
 	public Double pugMag(Integer fis, Integer mag){
 		
-		Double dano = (fis*mag)/120.0;
+		Double dano = (fis*mag)/160.0;
 		
 		return dano;
 		

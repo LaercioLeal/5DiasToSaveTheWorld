@@ -6,7 +6,7 @@ public class Arqueiro extends Classe {
 		
 		//Sagittis Spiritualis
 		
-		Double dano = (fis*mag)/120.0;
+		Double dano = (fis*mag)/185.0;
 		
 		return dano;
 		

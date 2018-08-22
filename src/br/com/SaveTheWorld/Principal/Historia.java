@@ -18,25 +18,25 @@ public class Historia{
 		
 		if(opc.equals(1)){
 			
-			System.out.println("SINTA O PODER DO MEU ATAQUE!");
+			System.out.println("Inimigo: SINTA O PODER DO MEU ATAQUE!");
 			dano = ini.AtqBas();
 			
 		}
 		else if(opc.equals(2)){
 			
-			System.out.println("Eu aniquilarei sua existência! INTERITUM!!");
+			System.out.println("Inimigo: Eu aniquilarei sua existência! INTERITUM!!");
 			dano = ini.Interitum();
 			
 		}
 		else if(opc.equals(3)){
 			
-			System.out.println("Mostrarei Todo o meu Poder Nuclear! MUNDI NUCLEAR AHAHAAHAH!!");
+			System.out.println("Inimigo: Mostrarei Todo o meu Poder Nuclear! MUNDI NUCLEAR AHAHAAHAH!!");
 			dano = ini.Mundi();
 			
 		}
 		else if(opc.equals(4)){
 			
-			System.out.println("Eu amaldiçoo a sua existencia ser insolente! VENEFICUS MALEDICTUS!");
+			System.out.println("Inimigo: Eu amaldiçoo a sua existencia ser insolente! VENEFICUS MALEDICTUS!");
 			dano = ini.Vene();
 			
 		}
@@ -141,7 +141,7 @@ public class Historia{
 				
 				play.c.setMp(mp - 25);
 				
-				System.out.println("\nSinta a magia da minha Espada! MAGIA GLADIUM!");
+				System.out.println("\n" + play.getNome() + ": Sinta a magia da minha Espada! MAGIA GLADIUM!");
 				
 			}
 			else if("3".equals(opc) && (mp - 10) >= 0){
@@ -150,7 +150,7 @@ public class Historia{
 				
 				play.c.setMp(mp - 10);
 				
-				System.out.println("\nMeu Poder Mágico e toda sua beleza!! TANTUM LUMEN!!\n");
+				System.out.println("\n" + play.getNome() + ": Meu Poder Mágico e toda sua beleza!! TANTUM LUMEN!!\n");
 				
 				if(dano <= 50){
 					System.err.println("Esta é uma magia para iluminação que causa pouco dano na vista das pessoas");
@@ -162,7 +162,7 @@ public class Historia{
 			else if("4".equals(opc)){
 				dano = c.secans(c.getPf());
 				
-				System.out.println("\nO Poder do meu Cajado! POTENTIA!");
+				System.out.println("\n" + play.getNome() + ": Você sofrerá com minha espada. SECANS!");
 				
 			}
 			else{
@@ -191,14 +191,14 @@ public class Historia{
 				
 				play.c.setMp(mp-20);
 				
-				System.out.println("\nO Poder do meu Cajado! POTENTIA!");
+				System.out.println("\n" + play.getNome() + ": O Poder do meu Cajado! POTENTIA!");
 			
 			}
 			else if("3".equals(opc)){
 				
 				dano = c.ferrum(c.getPf());
 				
-				System.out.println("\nTodo o Poder do meu Corpo! FERRUM!");
+				System.out.println("\n" + play.getNome() + ": Todo o Poder do meu Corpo! FERRUM!");
 				
 				if(dano <= 50){
 					System.err.println("Você é um mago, não devia sair por ai dando socos");
@@ -213,7 +213,7 @@ public class Historia{
 				
 				play.c.setMp(mp - 30);
 				
-				System.out.println("\nSinta sua destruição!! INTERITUM!");
+				System.out.println("\n" + play.getNome() + ": Sinta sua destruição!! INTERITUM!");
 				
 			}
 			else{
@@ -242,7 +242,7 @@ public class Historia{
 				
 				play.c.setMp(mp - 25);
 				
-				System.out.println("\nMeu poder físico e mágico juntos! PUGNIS ET MAGIA!!");
+				System.out.println("\n" + play.getNome() + ": Meu poder físico e mágico juntos! PUGNIS ET MAGIA!!");
 				
 			}
 			else if("3".equals(opc) && (mp - 10) >= 0){
@@ -251,7 +251,7 @@ public class Historia{
 				
 				play.c.setMp(mp - 10);
 				
-				System.out.println("\nCom um simples sopro mágico eu posso acabar com você! ICTU!");
+				System.out.println("\n" + play.getNome() + ": Com um simples sopro mágico eu posso acabar com você! ICTU!");
 				
 				if(dano <= 50){
 					System.err.println("Você é um lutador, não deveria sair soprando os outros por ai...");
@@ -264,7 +264,7 @@ public class Historia{
 				
 				dano = c.pub(c.getPf());
 				
-				System.out.println("\nSinta o poder dos meus socos! PUGNIS SIMPLEX");
+				System.out.println("\n" + play.getNome() + ": Sinta o poder dos meus socos! PUGNIS SIMPLEX");
 				
 			}
 			else{
@@ -292,7 +292,7 @@ public class Historia{
 				
 				play.c.setMp(mp - 18);
 				
-				System.out.println("\nFlechas mágicas que podem perfurar qualquer coisa! SAGITTIS SPIRITUALIS!");
+				System.out.println("\n" + play.getNome() + ": Flechas mágicas que podem perfurar qualquer coisa! SAGITTIS SPIRITUALIS!");
 				
 			}
 			else if("3".equals(opc) && (mp - 5) >= 0){
@@ -301,7 +301,7 @@ public class Historia{
 				
 				play.c.setMp(mp - 5);
 				
-				System.out.println("\nUma Chuva mágica que utiliza meu poder mágico!! PROIN");
+				System.out.println("\n" + play.getNome() + ": Uma Chuva mágica que utiliza meu poder mágico!! PROIN");
 				
 				if(dano <= 50){
 					System.err.println("Você é um arqueiro, fazer chover realmente não é o seu forte...");
@@ -316,7 +316,7 @@ public class Historia{
 				
 				play.c.setMp(mp-15);
 				
-				System.out.println("\nNada pode Parar minhas Flechas Duplas!! DUPLEX SAGITTIS");
+				System.out.println("\n" + play.getNome() + ": Nada pode Parar minhas Flechas Duplas!! DUPLEX SAGITTIS");
 				
 			}
 			else{
