@@ -2,13 +2,30 @@ package br.com.SaveTheWorld.Principal;
 
 public class Item {
 
+	private Integer id;
 	private String nome;
 	private String tipo;
 	private Integer atributo;
 	private String categoria;
 	private Double preco;
 	
+	//MÉTODO CONSTRUCTOR
+	public Item(Integer id, String nome, String tipo, Integer atributo, String categoria, Double preco){
+		this.id = id;
+		this.nome = nome;
+		this.tipo = tipo;
+		this.atributo = atributo;
+		this.categoria = categoria;
+		this.preco = preco;
+	}
+	
 	//MÉTODOS GETTERS & SETTERS
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}

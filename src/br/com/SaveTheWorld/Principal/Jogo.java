@@ -2,7 +2,6 @@ package br.com.SaveTheWorld.Principal;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
-
 import br.com.SaveTheWorld.PlayerClasse.*;
 
 public class Jogo {
@@ -47,9 +46,13 @@ public class Jogo {
 			System.out.println("Hp: " + df.format(play.c.getHp()) + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
 			System.out.println("Você precisa de " + play.nextLvl() + " de experiência para o próximo nível.");
 
+			//Variáveis Auxiliares para recuperar atributos
 			hpMax = play.c.getHp();
 			mpMax = play.c.getMp();
 			enMax = play.c.getEnergia();
+			
+			//Cria Loja
+			Loja l = Jogo.criaLoja();
 			
 			do{
 				
@@ -57,7 +60,7 @@ public class Jogo {
 				
 				System.out.println("\nOlá. O que deseja fazer agora?");
 				System.out.println("\t1-Enfrentar meus Inimigos(LUTAR)!\n\t2-Trabalhar(50 EN)");
-				System.out.println("\t3-Treinar\n\t4-Ir a Loja\n\t5-Descansar (50 G)\n\t6-Sair");
+				System.out.println("\t3-Treinar\n\t4-Loja\n\t5-Descansar (50 G)\n\t6-Sair");
 				
 				opc = tcld.nextLine();
 				
@@ -77,6 +80,11 @@ public class Jogo {
 				}
 				else if(opc.equals("3") || opc.equalsIgnoreCase("Treinar")){
 					play = Jogo.treinar(play, opc);
+				}
+				else if(opc.equals("4") || opc.equalsIgnoreCase("Loja")){
+					
+					Jogo.loja(l);
+					
 				}
 				else if (opc.equals("5") || opc.equalsIgnoreCase("Descansar")){
 					
@@ -314,5 +322,53 @@ public class Jogo {
 		
 		return play;
 		
+	}
+
+	public static Loja criaLoja(){
+		
+		//Criação dos itens da loja	
+		
+		Item espMag = new Item(1, "Espada Mágica", "Fisico", 35, "Arma", 300.00);
+		Item armPod = new Item(2, "Armadura do Poder", "HP/Fisico", 125, "Vestimenta", 1500.00);
+		Item escSim = new Item(3, "Escudo Simples", "HP", 30, "Escudo", 275.00);
+		Item cajAg = new Item(4, "Cajado da Água", "Magico", 40, "Arma", 300.00);
+		Item mantProt = new Item(5, "Manta Protetora", "HP/Magico", 135, "Vestimenta", 1650.00);
+		Item cart = new Item(6, "Cartola", "MP", 40, "Vestimenta", 350.00);
+		Item luvTe = new Item(7, "Luvas da Terra", "Fisico", 25, "Arma", 275.00);
+		Item cal = new Item(8, "Calção", "HP/MP", 50, "Vestimenta", 265.00);
+		Item brac = new Item(9, "Bracelete", "HP/Fisico", 115, "Vestimenta", 1470.00);
+		Item arcVent = new Item(10, "Arco do ar", "Fisico/Magico", 30, "Arma", 325.00);
+		Item botVel = new Item(11, "Botinha da Velocidade", "HP/Fisico", 40, "Vestimenta", 320.00);
+		Item flePer = new Item(12, "Flecha Perfuradora", "Fisico/Magico", 125, "Arma", 1750.00);
+		
+		//Criação da Loja
+		
+		Loja l = new Loja();
+		l.addItem(espMag);
+		l.addItem(armPod);
+		l.addItem(escSim);
+		l.addItem(cajAg);
+		l.addItem(mantProt);
+		l.addItem(cart);
+		l.addItem(luvTe);
+		l.addItem(cal);
+		l.addItem(brac);
+		l.addItem(arcVent);
+		l.addItem(botVel);
+		l.addItem(flePer);
+		
+		return l;
+	}
+
+	public static void loja(Loja l){
+		
+		//FINALIZAR LOJA - FAZER TRATAMENTO DOS ITENS
+		
+		for(Item i : l.itens){
+			System.out.println(
+			"\n" + i.getId()+ "-" + " Nome: " + i.getNome() + " | Categoria: " + i.getCategoria() + " | Atributo: "
+			+ i.getAtributo() + " - " + i.getTipo() + " | Preço: " + i.getPreco()
+			);
+		}
 	}
 }
