@@ -46,8 +46,6 @@ public abstract class Trabalho {
 			
 		}
 		
-		System.err.println("Você conseguiu: " + remun + " de gold!!");
-		
 		return remun;
 		
 	}

@@ -10,7 +10,7 @@ public class Player {
 	private Double gold;
 	private Integer Lvl;
 	private Double Exp;
-	private String equip;
+	private Item equip;
 	public Classe c;
 	private ArrayList<Item> bag = new ArrayList<Item>();
 
@@ -20,8 +20,7 @@ public class Player {
 		this.gold = 150.0;
 		this.Lvl = 1;
 		this.Exp = 5.0;
-		this.setEquip("Ó você está nú!");
-		
+		this.equip = new Item(null, "Oh! Você está Nú", null, 0, null, 0.0);
 	}
 	
 //MÉTODOS GETTERS E SETTERS
@@ -49,11 +48,44 @@ public class Player {
 	public void setExp(Double Exp) {
 		this.Exp = Exp;
 	}
-	public String getEquip() {
+	public Item getEquip() {
 		return equip;
 	}
-	public void setEquip(String equip) {
+	public String getEquipNome(){
+		return equip.getNome();
+	}
+	public void setEquip(Item equip) {
+
 		this.equip = equip;
+		
+		if(equip.getTipo().equalsIgnoreCase("Fisico")){
+			this.c.setPf(c.getPf() + equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("Magico")){
+			this.c.setPm(c.getPm() + equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("HP")){
+			this.c.setHp(c.getHp() + equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("MP")){
+			this.c.setMp(c.getMp() + equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("HP/Fisico")){
+			this.c.setPf(c.getPf() + equip.getAtributo());
+			this.c.setHp(c.getHp() + equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("HP/Magico")){
+			this.c.setPm(c.getPm() + equip.getAtributo());
+			this.c.setHp(c.getHp() + equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("Fisico/Magico")){
+			this.c.setPm(c.getPm() + equip.getAtributo());
+			this.c.setPf(c.getPf() + equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("HP/MP")){
+			this.c.setMp(c.getMp() + equip.getAtributo());
+			this.c.setHp(c.getHp() + equip.getAtributo());
+		}
 	}
 	public Classe getC() {
 		return c;
@@ -61,9 +93,44 @@ public class Player {
 	public ArrayList<Item> getBag() {
 		return bag;
 	}
-
 	public void setBag(ArrayList<Item> bag) {
 		this.bag = bag;
+	}
+	
+//MÉTODO PARA DESEQUIPAR ITEM
+	public void removeEquip() {
+		
+		if(equip.getTipo().equalsIgnoreCase("Fisico")){
+			this.c.setPf(c.getPf() - equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("Magico")){
+			this.c.setPm(c.getPm() - equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("HP")){
+			this.c.setHp(c.getHp() - equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("MP")){
+			this.c.setMp(c.getMp() - equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("HP/Fisico")){
+			this.c.setPf(c.getPf() - equip.getAtributo());
+			this.c.setHp(c.getHp() - equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("HP/Magico")){
+			this.c.setPm(c.getPm() - equip.getAtributo());
+			this.c.setHp(c.getHp() - equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("Fisico/Magico")){
+			this.c.setPm(c.getPm() - equip.getAtributo());
+			this.c.setPf(c.getPf() - equip.getAtributo());
+		}
+		else if(equip.getTipo().equalsIgnoreCase("HP/MP")){
+			this.c.setMp(c.getMp() - equip.getAtributo());
+			this.c.setHp(c.getHp() - equip.getAtributo());
+		}
+		
+		equip = new Item(null, "Oh! Você está Nú", null, 0, null, 0.0);
+		
 	}
 	
 //MÉTODO PARA SETAR A CLASSE SELECIONADA
@@ -137,4 +204,17 @@ public class Player {
 		
 	}
 	
+	//PEGANDO INDEX DO ITEM NA BAG
+	public Integer getIndex(Integer id){
+		
+		Integer index = null;
+		
+		for(Item i: bag){
+			if(i.getId() == id){
+				index = bag.indexOf(i);
+			}
+		}
+		return index;
+	}
+
 }

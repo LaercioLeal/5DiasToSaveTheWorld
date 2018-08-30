@@ -2,7 +2,11 @@ package br.com.SaveTheWorld.Principal;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
-import br.com.SaveTheWorld.PlayerClasse.*;
+
+import br.com.SaveTheWorld.PlayerClasse.Arqueiro;
+import br.com.SaveTheWorld.PlayerClasse.Cavaleiro;
+import br.com.SaveTheWorld.PlayerClasse.Lutador;
+import br.com.SaveTheWorld.PlayerClasse.Mago;
 
 public class Jogo {
 
@@ -16,7 +20,7 @@ public class Jogo {
 		//Declaração das Variáveis
 		Player play;
 		String opc, nome;
-		Integer ret;
+		Integer ret, index;
 		DecimalFormat df = new DecimalFormat("###,##0.00");
 		
 		System.out.println("5DiasToSavetheWorld!!");
@@ -60,7 +64,7 @@ public class Jogo {
 				
 				System.out.println("\nOlá. O que deseja fazer agora?");
 				System.out.println("\t1-Enfrentar meus Inimigos(LUTAR)!\n\t2-Trabalhar(50 EN)");
-				System.out.println("\t3-Treinar\n\t4-Loja\n\t5-Descansar (50 G)\n\t6-Sair");
+				System.out.println("\t3-Treinar\n\t4-Loja\n\t5-Descansar (50 G)\n\t6-Mochila\n\t7-Sair");
 				
 				opc = tcld.nextLine();
 				
@@ -83,7 +87,7 @@ public class Jogo {
 				}
 				else if(opc.equals("4") || opc.equalsIgnoreCase("Loja")){
 					
-					Jogo.loja(l);
+					Jogo.loja(play, l);
 					
 				}
 				else if (opc.equals("5") || opc.equalsIgnoreCase("Descansar")){
@@ -101,17 +105,65 @@ public class Jogo {
 						System.out.println("Você não tem Gold suficiente");
 					}
 				}
+				else if (opc.equals("6")){
+					if(play.getBag().isEmpty()){
+						System.out.println("Você não tem itens");
+					}
+					else{
+						System.out.println("Você tem os seguintes itens: ");
+						for(Item i : play.getBag()){							
+							System.out.println(i);
+						}	
+						System.out.println("O que deseja fazer? \n1-Equipar\n2-Desequipar\n0-Voltar");
+						opc = tcld.nextLine();
+						if(opc.equals("1") || opc.equalsIgnoreCase("Equipar")){
+							
+							System.out.println("Selecione o item que deseja equipar:\n");
+							opc = tcld.nextLine();
+							index = play.getIndex(Integer.parseInt(opc));
+							
+
+							if(index == null){
+								System.out.println("Você não possui este item ou o item não existe");
+							}
+							else if(play.getBag().contains(play.getBag().get(index))){
+								play.setEquip(play.getBag().get(index));
+								System.out.println("Item Equipado com Sucesso!");
+							}
+						}
+						else if(opc.equals("2") || opc.equalsIgnoreCase("Desequipar")){
+							System.out.println("Selecione o item que deseja desequipar:\n");
+							opc = tcld.nextLine();
+							index = play.getIndex(Integer.parseInt(opc));
+							
+							if(index == null){
+								System.out.println("Você não possui este item ou o item não existe");
+							}
+							else if(play.getBag().contains(play.getBag().get(index))){
+								play.removeEquip();
+								System.out.println("Item Equipado com Sucesso!");
+							}
+							
+						}
+						else if(opc.equals("0") || opc.equalsIgnoreCase("Voltar"));
+					}
+				}
 				ret = play.verificaExp(play);
 				
 				if(ret == 1){
 					System.err.println("Parabéns! Você passou de nivel!\nSeu nível agora é: " + play.getLvl());
 					System.out.println("Você precisa de " + df.format(play.nextLvl()) + " de experiência para o próximo nível.");
+					
+					hpMax = play.c.getHp();
+					mpMax = play.c.getMp();
+					enMax = play.c.getEnergia();
+					
 				}
 				
-				System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquip());
+				System.out.println("\nNome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + df.format(play.getExp()) + "\tGold: " + df.format(play.getGold()) + "\nEquipamentos: " + play.getEquipNome());
 				System.out.println("Hp: " + df.format(play.c.getHp()) + "\tMp: " + play.c.getMp() + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia());
 				
-			}while(!opc.equals("6"));
+			}while(!opc.equals("7"));
 			
 		}
 		
@@ -123,6 +175,7 @@ public class Jogo {
 	public static Player trabalho(Player play, String cat){
 		
 		Double remun;
+		DecimalFormat df = new DecimalFormat("###,##0.00");
 		
 		System.out.println("Como deseja trabalhar hoje?");
 		System.out.println("\t1-Padeiro\n\t2-Professor\n\t3-Vendedor\n\t4-Policial\n\t5-Politico\n\t6-Voltar");
@@ -133,10 +186,11 @@ public class Jogo {
 		}else{
 
 			remun = Trabalho.tipoTrab(cat, play.getLvl(), play.getExp());
+			System.err.println("Você conseguiu: " + df.format(remun) + " de gold!!");
 			remun = remun + play.getGold();
 			play.setGold(remun);
 			play.c.setEnergia(play.c.getEnergia() - 50);
-			System.err.println("Você agora tem: " + play.getGold() + " de gold!");
+			System.err.println("Você agora tem: " + df.format(play.getGold()) + " de gold!");
 		}
 				
 		return play;
@@ -221,9 +275,9 @@ public class Jogo {
 //MÉTODO DE TREINAMENTO
 	public static Player treinar(Player play, String opc){
 		
-		int aux1, aux2;
+		int aux1, aux2; //aux1 para descontar gold ## aux2 para descontar energia
 		Integer en;
-		Double g, aux;
+		Double g, aux; //aux para descontar hp
 		DecimalFormat df = new DecimalFormat("###,##0.00");
 		
 		System.out.println("Treinar:\n\t1-HP(20 EN/20G)\n\t2-MP(20 EN/20G)\n\t3-Poder Físico(30 EN/35G)");
@@ -238,7 +292,7 @@ public class Jogo {
 			aux1 = g.compareTo(0.0);
 			aux2 = en.compareTo(0);
 			
-			if(aux1 >= 0 && aux2 >= 0){
+			if(aux1 >= 0 && aux2 >= 0){ // >= pois compareTo retorna 1 para maior e 0 para menor
 				
 				hpMax = Treino.treinoHP(play, hpMax);
 				System.out.println("Você agora tem: " + df.format(hpMax) + " de HP total!");
@@ -324,10 +378,10 @@ public class Jogo {
 		
 	}
 
+//Métodos para a Loja
 	public static Loja criaLoja(){
 		
 		//Criação dos itens da loja	
-		
 		Item espMag = new Item(1, "Espada Mágica", "Fisico", 35, "Arma", 300.00);
 		Item armPod = new Item(2, "Armadura do Poder", "HP/Fisico", 125, "Vestimenta", 1500.00);
 		Item escSim = new Item(3, "Escudo Simples", "HP", 30, "Escudo", 275.00);
@@ -360,15 +414,78 @@ public class Jogo {
 		return l;
 	}
 
-	public static void loja(Loja l){
+	public static void loja(Player p, Loja l){
 		
-		//FINALIZAR LOJA - FAZER TRATAMENTO DOS ITENS
+		String opc;
+		Integer aux, index;
+		Double pagamento;
+		Item it;
 		
-		for(Item i : l.itens){
-			System.out.println(
-			"\n" + i.getId()+ "-" + " Nome: " + i.getNome() + " | Categoria: " + i.getCategoria() + " | Atributo: "
-			+ i.getAtributo() + " - " + i.getTipo() + " | Preço: " + i.getPreco()
-			);
-		}
+		do{
+			System.out.println("O que deseja fazer?\n1-Comprar\n2-Vender\n3-Voltar");
+			opc = tcld.nextLine();
+			if(opc.equals("1") || opc.equalsIgnoreCase("Comprar")){
+				for(Item i : l.getItens()){
+					System.out.println(i);
+				}
+				
+				System.out.println("\n0-Voltar\n");
+				System.out.println("Selecione o item que deseja comprar: \n");
+	
+				opc = tcld.nextLine();
+				index = l.getIndex(Integer.parseInt(opc)); // Chama método para pegar index
+				
+				if(index == null){
+					System.out.println("Esse item ja foi vendido ou não existe");
+				}
+				else if(Integer.parseInt(opc) > 0){
+					it = l.getItens().get(index); // Pega o Objeto que deseja comprar
+					pagamento = l.descontaGold(it.getPreco(), p.getGold());
+					aux = pagamento.compareTo(0.0);
+					
+					if(aux >= 0 && l.getItens().contains(it)){ // Verifica se pode ser vendido
+						p.setGold(pagamento);
+						l.vendeItem(it);
+						p.getBag().add(it);
+						System.out.println("Item comprado com Sucesso!!");
+					}
+					else{
+						System.out.println("Você não tem dinheiro Suficiente!");
+					}
+				}
+			}
+			else if(opc.equals("2") || opc.equalsIgnoreCase("Vender")){
+				
+				for(Item i : p.getBag()){
+					System.out.println(i);
+				}
+				
+				System.out.println("\n0-Voltar\n");
+				System.out.println("Selecione o item que deseja vender: \n");
+				
+				opc = tcld.nextLine();
+				index = p.getIndex(Integer.parseInt(opc));
+				if(index == null){
+					System.out.println("Você não possui este item ou o item não existe");
+				}
+				else{
+					it = p.getBag().get(index);
+					 
+					if(it.equals(p.getEquip())){
+						p.removeEquip();
+					}
+					if(Integer.parseInt(opc) > 0 && p.getBag().contains(it)){
+						pagamento = l.recebeGold(it.getPreco(), p.getGold());
+						p.setGold(pagamento);
+						p.getBag().remove(it);
+						l.itens.remove(it);
+						System.out.println("Item vendido com Sucesso");
+						
+					}
+				}
+				
+			}
+		}while(!(opc.equals("3") || opc.equalsIgnoreCase("Voltar")));
+		
 	}
 }

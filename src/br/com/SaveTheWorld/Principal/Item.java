@@ -56,4 +56,12 @@ public class Item {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return id + "-" + " Nome: " + nome + " | Categoria: " + categoria + " | Atributo: "
+				+ atributo + " - " + tipo + " | Preço: " + preco;
+	}
+	
 }
