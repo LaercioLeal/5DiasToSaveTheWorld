@@ -45,75 +45,6 @@ public class Historia{
 		
 	}
 
-	public static Player hist(Player play, String opc){
-		
-		Inimigo ini = new Inimigo();
-		DecimalFormat df = new DecimalFormat("###,##0.00");
-		
-		System.out.println("Selecione Seu Inimigo: ");
-		System.out.println("\t1-Ini1\t2-Ini2\t3-Ini3\t4-Ini4");
-		
-		opc = tcld.nextLine();
-		
-		ini = Inimigo.CriaIni(play, opc);
-		Double dano = 0.0;
-		Double danop = 0.0;
-		
-		Double Hp = play.c.getHp();
-		Integer Mp = play.c.getMp();
-		
-		Double exp = 0.0;
-		
-		System.err.println("Seu inimigo tem: " + df.format(ini.getHp()) + " de Hp.");
-		
-		do{
-			
-			//Continuar pela simulação de luta
-			
-			System.out.println("Selecione seu Ataque: ");
-			
-			dano = Historia.ExibeAtq(play, opc); //Dano causado no inimigo
-			dano = ini.getHp() - dano;
-			
-			danop = Historia.IniAtq(ini); //Dano causado no player
-			System.err.println("Você sofreu " + df.format(danop) + " de dano.");
-			danop = play.c.getHp() - danop;
-			
-			ini.setHp(dano);
-			play.c.setHp(danop);
-			
-			if(play.c.getHp() <= 0){
-				System.err.println("Oh, você Morreu!!");
-				System.err.println("Seu inimigo tem: " + df.format(ini.getHp()) + " de Hp.");
-				break;
-			}
-			else if(ini.getHp() <= 0){
-				System.err.println("Você tem: " + df.format(play.c.getHp()) + " de HP.");
-				System.err.println("Oh, Você matou seu oponente!");
-				
-				exp = (ini.getPf() + ini.getPm())*0.3;
-				
-				System.err.println("Você conseguiu: " + df.format(exp) + " de exp.");
-				
-				exp = play.getExp() + exp;
-				play.setExp(exp);
-				
-			}
-			else{
-				System.err.println("Você tem: " + df.format(play.c.getHp()) + " de HP.");
-				System.err.println("Seu inimigo tem: " + df.format(ini.getHp()) + " de Hp.");	
-			}
-			
-		}while((ini.getHp()) > 0);
-		
-		play.c.setHp(Hp);
-		play.c.setMp(Mp);
-		
-		return play;
-		
-	}
-	
-	
 	public static Double ExibeAtq(Player play, String opc){
 		
 		DecimalFormat df = new DecimalFormat("###,##0.00");
@@ -332,4 +263,5 @@ public class Historia{
 		return dano;
 		
 	}
+
 }

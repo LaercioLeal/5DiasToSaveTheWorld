@@ -172,15 +172,15 @@ public class Player {
 		
 	}
 	
-	public Integer verificaExp(Player play){
+	public Integer verificaExp(){
 		
-		Integer nextLvl = play.nextLvl();
+		Integer nextLvl = nextLvl();
 		Integer ret = 0;
-		Double hp = play.c.getHp();
-		Integer mp = play.c.getMp();
-		Integer pf = play.c.getPf();
-		Integer pm = play.c.getPm();
-		Integer en = play.c.getEnergia();
+		Double hp = c.getHpMax();
+		Integer mp = c.getMpMax();
+		Integer pf = c.getPf();
+		Integer pm = c.getPm();
+		Integer en = c.getEnergiaMax();
 		
 		if(Exp >= nextLvl){
 			
@@ -190,14 +190,17 @@ public class Player {
 			pm = pm + (pm*5)/100;
 			en = en + (en*5)/100;
 			
-			play.setLvl(Lvl + 1);
-			play.c.setHp(hp);
-			play.c.setMp(mp);
-			play.c.setPf(pf);
-			play.c.setPm(pm);
-			play.c.setEnergia(en);
-			
+			setLvl(Lvl + 1);
+			c.setHp(hp);
+			c.setHpMax(hp);
+			c.setMp(mp);
+			c.setMpMax(mp);
+			c.setPf(pf);
+			c.setPm(pm);
+			c.setEnergia(en);
+			c.setEnergiaMax(en);
 			ret = 1;
+			
 		}
 		
 		return ret;

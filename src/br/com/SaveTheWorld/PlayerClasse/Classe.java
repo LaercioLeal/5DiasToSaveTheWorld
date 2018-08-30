@@ -2,8 +2,8 @@ package br.com.SaveTheWorld.PlayerClasse;
 
 public abstract class Classe {
 
-	private Integer mp, pf, pm, energia;
-	private Double hp;
+	private Integer mp, mpMax, pf, pm, energia, energiaMax;
+	private Double hp, hpMax;
 	
 	//ATAQUES E MAGIAS
 	
@@ -64,6 +64,30 @@ public abstract class Classe {
 
 	public void setEnergia(Integer energia) {
 		this.energia = energia;
+	}
+
+	public Integer getMpMax() {
+		return mpMax;
+	}
+
+	public void setMpMax(Integer mpMax) {
+		this.mpMax = mpMax;
+	}
+
+	public Integer getEnergiaMax() {
+		return energiaMax;
+	}
+
+	public void setEnergiaMax(Integer energiaMax) {
+		this.energiaMax = energiaMax;
+	}
+
+	public Double getHpMax() {
+		return hpMax;
+	}
+
+	public void setHpMax(Double hpMax) {
+		this.hpMax = hpMax;
 	}
 	
 }
