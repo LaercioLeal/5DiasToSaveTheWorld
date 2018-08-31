@@ -6,47 +6,44 @@ public class Inimigo {
 
 	Double Hp;
 	Integer Pf, Pm;
-	private static Inimigo ini = new Inimigo();
 	
-	public static Inimigo CriaIni(Player p, String opc){
+	public void CriaIni(Player p, String opc){
 		
 		Double aux;
 		
 		if(opc.equals("1") || opc.equalsIgnoreCase("Cavaleiro")){
 			
 			aux = (p.c.getHp()*1.7);
-			ini.setHp(aux);
-			ini.setPf(p.c.getPf() + (p.c.getPf()*10)/100);
-			ini.setPm(p.c.getPm() + (p.c.getPm()*8)/100);
+			setHp(aux);
+			setPf(p.c.getPf() + (p.c.getPf()*10)/100);
+			setPm(p.c.getPm() + (p.c.getPm()*8)/100);
 			
 		}
 		else if(opc.equals("2") || opc.equalsIgnoreCase("Mago")){
 
 			aux = (p.c.getHp()*1.4);
-			ini.setHp(aux);
-			ini.setPf(p.c.getPf() + (p.c.getPf()*8)/100);
-			ini.setPm(p.c.getPm() + (p.c.getPm()*10)/100);
+			setHp(aux);
+			setPf(p.c.getPf() + (p.c.getPf()*8)/100);
+			setPm(p.c.getPm() + (p.c.getPm()*10)/100);
 			
 		}
 		else if(opc.equals("3") || opc.equalsIgnoreCase("Lutador")){
 
 			aux = (p.c.getHp()*1.6);
-			ini.setHp(aux);
-			ini.setPf(p.c.getPf() + (p.c.getPf()*12)/100);
-			ini.setPm(p.c.getPm() + (p.c.getPm()*10)/100);
+			setHp(aux);
+			setPf(p.c.getPf() + (p.c.getPf()*12)/100);
+			setPm(p.c.getPm() + (p.c.getPm()*10)/100);
 			
 		}
 		else if(opc.equals("4") || opc.equalsIgnoreCase("Arqueiro")){
 
 			aux = (p.c.getHp()*1.5);
-			ini.setHp(aux);
-			ini.setPf(p.c.getPf() + (p.c.getPf()*10)/100);
-			ini.setPm(p.c.getPm() + (p.c.getPm()*10)/100);
+			setHp(aux);
+			setPf(p.c.getPf() + (p.c.getPf()*10)/100);
+			setPm(p.c.getPm() + (p.c.getPm()*10)/100);
 			
 		}
-		
-		return ini;
-		
+
 	}
 
 	
@@ -55,8 +52,8 @@ public class Inimigo {
 	public Double AtqBas(){
 	
 		Double dano = 0.0;
-		Integer fis = ini.getPf();
-		Integer mag = ini.getPm();
+		Integer fis = getPf();
+		Integer mag = getPm();
 		
 		if(fis >= mag){
 			
@@ -75,8 +72,8 @@ public class Inimigo {
 	public Double Interitum(){
 		
 		Double dano = 0.0;
-		Integer fis = ini.getPf();
-		Integer mag = ini.getPm();
+		Integer fis = getPf();
+		Integer mag = getPm();
 		
 		dano = (fis*mag)/275.0;
 		
@@ -89,8 +86,8 @@ public class Inimigo {
 		//Mundi Nuclear
 		
 		Double dano = 0.0;
-		Integer fis = ini.getPf();
-		Integer mag = ini.getPm();
+		Integer fis = getPf();
+		Integer mag = getPm();
 		
 		if(fis > mag){
 			
@@ -112,8 +109,8 @@ public class Inimigo {
 		//Veneficus Maledictus
 	
 		Double dano = 0.0;
-		Integer fis = ini.getPf();
-		Integer mag = ini.getPm();
+		Integer fis = getPf();
+		Integer mag = getPm();
 		
 		if(fis > mag){
 			

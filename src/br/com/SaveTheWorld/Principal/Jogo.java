@@ -12,169 +12,175 @@ import br.com.SaveTheWorld.PlayerClasse.Mago;
 public class Jogo {
 
 	static Scanner tcld = new Scanner(System.in);
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+
 		//Declaração das Variáveis
 		Player play;
 		String opc, nome;
 		Integer ret, index;
 		DecimalFormat df = new DecimalFormat("###,##0.00");
-		
-		System.out.println("5DiasToSavetheWorld!!");
-		System.out.println("\nSeja Bem-Vindo Jogador!");
-		System.out.println("O que deseja fazer?");
-		System.out.println("\t1-Começar\n\t2-Informações\n\t3-Sair");
-		
-		opc = tcld.nextLine();
-		
-		if(opc.equals("1") || opc.equalsIgnoreCase("Começar")){
-			
-			//Inicio da Criação do personagem
-			
-			System.out.println("Digite o Nome de seu Personagem: ");
-			nome = tcld.nextLine();
+		do{
 
-			play = new Player(nome);
-			
-			System.out.println("Escolha a Classe desejada:");
-			System.out.println("\n\t1-Cavaleiro\n\t2-Mago\n\t3-Lutador\n\t4-Arqueiro");
-		
+			System.out.println("5DiasToSavetheWorld!!");
+			System.out.println("\nSeja Bem-Vindo Jogador!");
+			System.out.println("O que deseja fazer?");
+			System.out.println("\t1-Começar\n\t2-Informações\n\t3-Sair");
+
 			opc = tcld.nextLine();
 			
-			play = Jogo.cria(play, opc);
-			
-			//Variáveis Auxiliares para recuperar atributos
-			play.c.setHpMax(play.c.getHp());
-			play.c.setMpMax(play.c.getMp());
-			play.c.setEnergiaMax(play.c.getEnergia());
-			
-			//Exibindo dados do jogador
-			System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "/" + play.nextLvl() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquipNome());
-			System.out.println("Hp: " + df.format(play.c.getHp())+ "/" + df.format(play.c.getHpMax()) + "\tMp: " + play.c.getMp() + "/" + play.c.getMpMax() 
-			   + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia() + "/" + play.c.getEnergiaMax());
-			
-			//Cria Loja
-			Loja l = Jogo.criaLoja();
-			
-			do{
-				
-				//Inicio do Jogo
-				
-				System.out.println("\nOlá. O que deseja fazer agora?");
-				System.out.println("\t1-Enfrentar meus Inimigos(LUTAR)!\n\t2-Trabalhar");
-				System.out.println("\t3-Treinar\n\t4-Loja\n\t5-Descansar (50 G)\n\t6-Mochila\n\t7-Sair");
-				
-				opc = tcld.nextLine();
-				
-				if(opc.equals("1") || opc.equalsIgnoreCase("Lutar")){
-					
-					play = Jogo.historia(play);
-					
-				}
-				else if(opc.equals("2") || opc.equalsIgnoreCase("Trabalhar")){
-					
-						play = Jogo.trabalho(play);
-				
-				}
-				else if(opc.equals("3") || opc.equalsIgnoreCase("Treinar")){
-					play = Jogo.treinar(play, opc);
-				}
-				else if(opc.equals("4") || opc.equalsIgnoreCase("Loja")){
-					
-					Jogo.loja(play, l);
-					
-				}
-				else if (opc.equals("5") || opc.equalsIgnoreCase("Descansar")){
-					
-					if((play.getGold() - 50.0) >= 0){
-							
-						play.setGold(play.getGold() - 50.0);
-						play.c.setHp(play.c.getHpMax());
-						play.c.setMp(play.c.getMpMax());
-						play.c.setEnergia(play.c.getEnergiaMax());
-						
-						System.out.println("Você se recuperou bem!!");
-					}
-					else{
-						System.out.println("Você não tem Gold suficiente");
-					}
-				}
-				else if (opc.equals("6")){
-					if(play.getBag().isEmpty()){
-						System.out.println("Você não tem itens");
-					}
-					else{
-						System.out.println("Você tem os seguintes itens: ");
-						for(Item i : play.getBag()){							
-							System.out.println(i);
-						}	
-						System.out.println("O que deseja fazer? \n1-Equipar\n2-Desequipar\n0-Voltar");
-						opc = tcld.nextLine();
-						if(opc.equals("1") || opc.equalsIgnoreCase("Equipar")){
-							
-							System.out.println("Selecione o item que deseja equipar:\n");
-							opc = tcld.nextLine();
-							index = play.getIndex(Integer.parseInt(opc));
-							
+			if(opc.equals("1") || opc.equalsIgnoreCase("Começar")){
 
-							if(index == null){
-								System.out.println("Você não possui este item ou o item não existe");
-							}
-							else if(play.getBag().contains(play.getBag().get(index))){
-								play.setEquip(play.getBag().get(index));
-								System.out.println("Item Equipado com Sucesso!");
-							}
-						}
-						else if(opc.equals("2") || opc.equalsIgnoreCase("Desequipar")){
-							System.out.println("Selecione o item que deseja desequipar:\n");
-							opc = tcld.nextLine();
-							index = play.getIndex(Integer.parseInt(opc));
-							
-							if(index == null){
-								System.out.println("Você não possui este item ou o item não existe");
-							}
-							else if(play.getBag().contains(play.getBag().get(index))){
-								play.removeEquip();
-								System.out.println("Item Equipado com Sucesso!");
-							}
-							
-						}
-						else if(opc.equals("0") || opc.equalsIgnoreCase("Voltar"));
-					}
-				}
-				ret = play.verificaExp();
-				
-				if(play.c.getHp() <= 0){
-					System.out.println("GAME OVER!");
-					break;
-				}
-				else if(ret == 1){
-					System.err.println("Parabéns! Você passou de nivel!\nSeu nível agora é: " + play.getLvl());
-					System.out.println("Você precisa de " + df.format(play.nextLvl()) + " de experiência para o próximo nível.");
-					
-					play.c.setHpMax(play.c.getHp());
-					play.c.setMpMax(play.c.getMp());
-					play.c.setEnergiaMax(play.c.getEnergia());
-					
-				}
-				
-				System.out.println("\nNome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + df.format(play.getExp()) + "/" + play.nextLvl()  + "\tGold: " + df.format(play.getGold()) + "\nEquipamentos: " + play.getEquipNome());
+				//Inicio da Criação do personagem
+
+				System.out.println("Digite o Nome de seu Personagem: ");
+				nome = tcld.nextLine();
+
+				play = new Player(nome);
+
+				System.out.println("Escolha a Classe desejada:");
+				System.out.println("\n\t1-Cavaleiro\n\t2-Mago\n\t3-Lutador\n\t4-Arqueiro");
+
+				opc = tcld.nextLine();
+
+				play = Jogo.cria(play, opc);
+
+				//Variáveis Auxiliares para recuperar atributos
+				play.c.setHpMax(play.c.getHp());
+				play.c.setMpMax(play.c.getMp());
+				play.c.setEnergiaMax(play.c.getEnergia());
+
+				//Exibindo dados do jogador
+				System.out.println("Nome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + play.getExp() + "/" + play.nextLvl() + "\tGold: " + play.getGold() + "\nEquipamentos: " + play.getEquipNome());
 				System.out.println("Hp: " + df.format(play.c.getHp())+ "/" + df.format(play.c.getHpMax()) + "\tMp: " + play.c.getMp() + "/" + play.c.getMpMax() 
-								   + "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia() + "/" + play.c.getEnergiaMax());
-				
-			}while(!opc.equals("7"));
-			
-		}
-		
+				+ "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia() + "/" + play.c.getEnergiaMax());
+
+				//Cria Loja
+				Loja l = Jogo.criaLoja();
+
+				do{
+
+					//Inicio do Jogo
+
+					System.out.println("\nOlá. O que deseja fazer agora?");
+					System.out.println("\t1-Enfrentar meus Inimigos(LUTAR)!\n\t2-Trabalhar");
+					System.out.println("\t3-Treinar\n\t4-Loja\n\t5-Descansar (50 G)\n\t6-Mochila\n\t7-Sair");
+
+					opc = tcld.nextLine();
+
+					if(opc.equals("1") || opc.equalsIgnoreCase("Lutar")){
+
+						play = Jogo.historia(play);
+
+					}
+					else if(opc.equals("2") || opc.equalsIgnoreCase("Trabalhar")){
+
+						play = Jogo.trabalho(play);
+
+					}
+					else if(opc.equals("3") || opc.equalsIgnoreCase("Treinar")){
+						play = Jogo.treinar(play, opc);
+					}
+					else if(opc.equals("4") || opc.equalsIgnoreCase("Loja")){
+
+						Jogo.loja(play, l);
+
+					}
+					else if (opc.equals("5") || opc.equalsIgnoreCase("Descansar")){
+
+						if((play.getGold() - 50.0) >= 0){
+
+							play.setGold(play.getGold() - 50.0);
+							play.c.setHp(play.c.getHpMax());
+							play.c.setMp(play.c.getMpMax());
+							play.c.setEnergia(play.c.getEnergiaMax());
+
+							System.out.println("Você se recuperou bem!!");
+						}
+						else{
+							System.out.println("Você não tem Gold suficiente");
+						}
+					}
+					else if (opc.equals("6")){
+						if(play.getBag().isEmpty()){
+							System.out.println("Você não tem itens");
+						}
+						else{
+							System.out.println("Você tem os seguintes itens: ");
+							for(Item i : play.getBag()){							
+								System.out.println(i);
+							}	
+							System.out.println("O que deseja fazer? \n1-Equipar\n2-Desequipar\n0-Voltar");
+							opc = tcld.nextLine();
+							if(opc.equals("1") || opc.equalsIgnoreCase("Equipar")){
+
+								System.out.println("Selecione o item que deseja equipar:\n");
+								opc = tcld.nextLine();
+								index = play.getIndex(Integer.parseInt(opc));
+
+
+								if(index == null){
+									System.out.println("Você não possui este item ou o item não existe");
+								}
+								else if(play.getBag().contains(play.getBag().get(index))){
+									play.setEquip(play.getBag().get(index));
+									System.out.println("Item Equipado com Sucesso!");
+								}
+							}
+							else if(opc.equals("2") || opc.equalsIgnoreCase("Desequipar")){
+								System.out.println("Selecione o item que deseja desequipar:\n");
+								opc = tcld.nextLine();
+								index = play.getIndex(Integer.parseInt(opc));
+
+								if(index == null){
+									System.out.println("Você não possui este item ou o item não existe");
+								}
+								else if(play.getBag().contains(play.getBag().get(index))){
+									play.removeEquip();
+									System.out.println("Item Equipado com Sucesso!");
+								}
+
+							}
+							else if(opc.equals("0") || opc.equalsIgnoreCase("Voltar"));
+						}
+					}
+					ret = play.verificaExp();
+
+					if(play.c.getHp() <= 0){
+						System.out.println("GAME OVER!");
+						break;
+					}
+					else if(ret == 1){
+						System.err.println("Parabéns! Você passou de nivel!\nSeu nível agora é: " + play.getLvl());
+						System.out.println("Você precisa de " + df.format(play.nextLvl()) + " de experiência para o próximo nível.");
+
+						play.c.setHpMax(play.c.getHp());
+						play.c.setMpMax(play.c.getMp());
+						play.c.setEnergiaMax(play.c.getEnergia());
+
+					}
+
+					System.out.println("\nNome: " + play.getNome() + "\tLevel: " + play.getLvl() + "\tExp: " + df.format(play.getExp()) + "/" + play.nextLvl()  + "\tGold: " + df.format(play.getGold()) + "\nEquipamentos: " + play.getEquipNome());
+					System.out.println("Hp: " + df.format(play.c.getHp())+ "/" + df.format(play.c.getHpMax()) + "\tMp: " + play.c.getMp() + "/" + play.c.getMpMax() 
+					+ "\tPf: " + play.c.getPf() + "\tPm: " + play.c.getPm() + "\tEnergia: " + play.c.getEnergia() + "/" + play.c.getEnergiaMax());
+
+				}while(!opc.equals("7"));
+
+			}
+			else if(opc.equals("2") || opc.equalsIgnoreCase("Informações")){
+				System.out.println("\nUFRB\nDesenvolvedor: Laércio Leal \nProfessor: Guilherme Braga Araújo "
+						+ "\nDisciplina: Principios de Orientação a Objetos\n");
+			}
+		}while(!(opc.equals("3") || opc.equalsIgnoreCase("Sair")));
 		tcld.close();
-		
+
 	}
 
 //MÉTODO DE CRIAÇÃO DE PERSONAGEM
 	public static Player cria(Player play, String opc){
 
+		//Verificação da Classe escolhida
 		if(opc.equalsIgnoreCase("Cavaleiro") || opc.equalsIgnoreCase("Cav") || opc.equals("1")){
 
 			Cavaleiro cav = new Cavaleiro();
@@ -262,7 +268,7 @@ public class Jogo {
 		
 		opc = tcld.nextLine();
 		
-		ini = Inimigo.CriaIni(play, opc); //Envia dados para criação do inimigo
+		ini.CriaIni(play, opc); //Envia dados para criação do inimigo
 		
 		System.err.println("Seu inimigo tem: " + df.format(ini.getHp()) + " de Hp.");
 		
@@ -275,32 +281,36 @@ public class Jogo {
 
 			System.err.println("Você sofreu " + df.format(danop) + " de dano.");
 			
-			dano = ini.getHp() - dano;
+			//Calculando Hp que ficará
+			dano = ini.getHp() - dano; 
 			danop = play.c.getHp() - danop;
 			
 			ini.setHp(dano);
 			play.c.setHp(danop);
 			
+			//Verificação de HP
+			
 			if(play.c.getHp() <= 0){
+				
 				System.err.println("Oh, você Morreu!!");
-				System.err.println("Seu inimigo tem: " + df.format(ini.getHp()) + " de Hp.");
 				break;
+				
 			}
 			else if(ini.getHp() <= 0){
-				System.err.println("Você tem: " + df.format(play.c.getHp()) + " de HP.");
-				System.err.println("Oh, Você matou seu oponente!");
-				
+
 				exp = (ini.getPf() + ini.getPm())*0.3;
 				
-				System.err.println("Você conseguiu: " + df.format(exp) + " de exp.");
+				System.err.println("Você tem: " + df.format(play.c.getHp()) + " de HP." + "\n" +
+									"Oh, Você matou seu oponente!" + "\n" +
+									"Você conseguiu: " + df.format(exp) + " de exp.");
 				
 				exp = play.getExp() + exp;
 				play.setExp(exp);
 				
 			}
 			else{
-				System.err.println("Você tem: " + df.format(play.c.getHp()) + " de HP.");
-				System.err.println("Seu inimigo tem: " + df.format(ini.getHp()) + " de Hp.");	
+				System.err.println("Você tem: " + df.format(play.c.getHp()) + " de HP." + "\n" + 
+									"Seu inimigo tem: " + df.format(ini.getHp()) + " de Hp.");	
 			}
 			
 		}while((ini.getHp()) > 0);
@@ -316,19 +326,23 @@ public class Jogo {
 		DecimalFormat df = new DecimalFormat("###,##0.00");
 		Integer En = 0;
 		
-		System.out.println("Tenha em mente que você gastará energia ao trabalhar");
+		System.err.println("Tenha em mente que você gastará energia ao trabalhar");
 		System.out.println("Como deseja trabalhar hoje?");
 		System.out.println("\t1-Padeiro\n\t2-Professor\n\t3-Vendedor\n\t4-Policial\n\t5-Politico\n\t6-Voltar");
 		
 		cat = tcld.nextLine();
+		
+		//Verificando Opção escolhida
 		if(cat.equals("6")){
 			System.out.println("Até mais!!");
 		}else{
 			
 			if("Padeiro".equalsIgnoreCase(cat) || "1".equals(cat)){
 				
-				remun = Trabalho.calculoRemuneracao(play.getLvl(), 0.75*play.getExp());
-				En = (15*play.c.getEnergia())/100;
+				remun = Trabalho.calculoRemuneracao(play.getLvl(), 0.75*play.getExp()); //Calculo do Salário
+				
+				//Calculo do Gasto de Energia
+				En = (15*play.c.getEnergia())/100; 
 				En = Trabalho.descontaEnergia(play.getLvl(), En);
 				
 				System.out.println("Parabéns por ser um Padeiro tão esforçado!\n");
@@ -336,7 +350,9 @@ public class Jogo {
 			}
 			else if("Professor".equalsIgnoreCase(cat) || "2".equals(cat)){
 				
-				remun = Trabalho.calculoRemuneracao(play.getLvl(), 0.15*play.getExp());
+				remun = Trabalho.calculoRemuneracao(play.getLvl(), 0.15*play.getExp()); //Calculo do Salário
+				
+				//Calculo do Gasto de Energia
 				En = (50*play.c.getEnergia())/100;
 				En = Trabalho.descontaEnergia(play.getLvl(), En);
 				
@@ -350,7 +366,9 @@ public class Jogo {
 			}
 			else if("Vendedor".equalsIgnoreCase(cat) || "3".equals(cat)){
 				
-				remun = Trabalho.calculoRemuneracao(play.getLvl(), 0.90*play.getExp());
+				remun = Trabalho.calculoRemuneracao(play.getLvl(), 0.90*play.getExp()); //Cálculo do Salário
+				
+				//Calculo do Gasto de Energia
 				En = (25*play.c.getEnergia())/100;
 				En = Trabalho.descontaEnergia(play.getLvl(), En);
 				
@@ -359,7 +377,9 @@ public class Jogo {
 			}
 			else if("Policial".equalsIgnoreCase(cat) || "4".equals(cat)){
 				
-				remun = Trabalho.calculoRemuneracao(play.getLvl(), 1.05*play.getExp());
+				remun = Trabalho.calculoRemuneracao(play.getLvl(), 1.05*play.getExp()); //Cálculo do Salário
+				
+				//Calculo do Gasto de Energia
 				En = (18*play.c.getEnergia())/100;
 				En = Trabalho.descontaEnergia(play.getLvl(), En);
 				
@@ -368,7 +388,9 @@ public class Jogo {
 			}
 			else if("Politico".equalsIgnoreCase(cat) || "5".equals(cat)){
 				
-				remun = Trabalho.calculoRemuneracao(play.getLvl(), 2.5*play.getExp());
+				remun = Trabalho.calculoRemuneracao(play.getLvl(), 2.5*play.getExp()); //Cálculo do Salário
+				
+				//Calculo do Gasto de Energia
 				En = (3*play.c.getEnergia())/100;
 				En = Trabalho.descontaEnergia(play.getLvl(), En);
 				
@@ -376,15 +398,18 @@ public class Jogo {
 				
 			}
 			
-			if((play.c.getEnergia()-En) < 0){
+			
+			if((play.c.getEnergia()-En) < 0){ //Verifica Energia e valida o trabalho
 				System.out.println("Você não tem Energia suficiente");
 			}
 			else{
 				System.err.println("Você conseguiu: " + df.format(remun) + " de gold!!");
 				System.err.println("Você gastou: " + En + " de energia!!");
-				remun = remun + play.getGold();
+				
+				remun = remun + play.getGold(); //Calcula a quantidade total de Gold
 				play.setGold(remun);
 				play.c.setEnergia(play.c.getEnergia() - En);
+				
 				System.err.println("Você agora tem: " + df.format(play.getGold()) + " de gold!");
 				System.err.println("Você agora tem: " + play.c.getEnergia() + " de energia!");
 			}

@@ -257,8 +257,8 @@ public class Historia{
 			}
 		}
 		
-		System.err.println("Dano causado: " + df.format(dano));
-		System.err.println("Você tem: " + play.c.getMp() + " de mana.");
+		System.err.println("Dano causado: " + df.format(dano)+ "\n" + 
+							"Você tem: " + play.c.getMp() + " de mana.");
 		
 		return dano;
 		
