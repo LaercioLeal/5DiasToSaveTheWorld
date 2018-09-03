@@ -2,7 +2,6 @@ package br.com.SaveTheWorld.Principal;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
-
 import br.com.SaveTheWorld.PlayerClasse.Arqueiro;
 import br.com.SaveTheWorld.PlayerClasse.Cavaleiro;
 import br.com.SaveTheWorld.PlayerClasse.Inimigo;
@@ -21,6 +20,7 @@ public class Jogo {
 		String opc, nome;
 		Integer ret, index;
 		DecimalFormat df = new DecimalFormat("###,##0.00");
+		
 		do{
 
 			System.out.println("5DiasToSavetheWorld!!");
